@@ -1,0 +1,16 @@
+{
+  "short_name": "Reptile Tablet",
+  "name": "Reptile Info Tablet - Petco",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#2D5016",
+  "background_color": "#1A3D14",
+  "description": "Interactive tablet application for educating Petco customers about reptiles and amphibians"
+}

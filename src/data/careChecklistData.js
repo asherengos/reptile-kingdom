@@ -1,0 +1,688 @@
+// Care Checklist Data for Reptile Info Tablet
+// Provides comprehensive shopping lists and care requirements for each species
+
+export const careChecklistData = {
+  'Leopard Gecko': {
+    essential: [
+      {
+        id: 'lg_habitat_1',
+        category: 'Habitat',
+        item: '20+ gallon terrarium',
+        description: 'Minimum size for adult leopard gecko',
+        priority: 'critical',
+        estimatedCost: '$40-80',
+        notes: 'Glass terrarium with secure lid'
+      },
+      {
+        id: 'lg_habitat_2',
+        category: 'Habitat',
+        item: 'Heat mat or under-tank heater',
+        description: 'For belly heat and digestion',
+        priority: 'critical',
+        estimatedCost: '$20-40',
+        notes: 'Should cover 1/3 of tank bottom'
+      },
+      {
+        id: 'lg_habitat_3',
+        category: 'Habitat',
+        item: 'Thermometer',
+        description: 'To monitor temperature',
+        priority: 'critical',
+        estimatedCost: '$10-20',
+        notes: 'Digital thermometer recommended'
+      },
+      {
+        id: 'lg_substrate_1',
+        category: 'Substrate',
+        item: 'Paper towels or reptile carpet',
+        description: 'Safe substrate for young geckos',
+        priority: 'critical',
+        estimatedCost: '$5-15',
+        notes: 'Avoid loose substrates for juveniles'
+      },
+      {
+        id: 'lg_hiding_1',
+        category: 'Hiding Spots',
+        item: 'Warm hide',
+        description: 'Hiding spot on warm side',
+        priority: 'critical',
+        estimatedCost: '$10-25',
+        notes: 'Should be snug and secure'
+      },
+      {
+        id: 'lg_hiding_2',
+        category: 'Hiding Spots',
+        item: 'Cool hide',
+        description: 'Hiding spot on cool side',
+        priority: 'critical',
+        estimatedCost: '$10-25',
+        notes: 'Should be snug and secure'
+      },
+      {
+        id: 'lg_hiding_3',
+        category: 'Hiding Spots',
+        item: 'Humid hide',
+        description: 'For shedding assistance',
+        priority: 'important',
+        estimatedCost: '$15-30',
+        notes: 'Fill with damp moss or paper towels'
+      },
+      {
+        id: 'lg_food_1',
+        category: 'Food',
+        item: 'Live insects (crickets, mealworms)',
+        description: 'Primary food source',
+        priority: 'critical',
+        estimatedCost: '$5-15/week',
+        notes: 'Gut-load insects before feeding'
+      },
+      {
+        id: 'lg_food_2',
+        category: 'Food',
+        item: 'Calcium supplement',
+        description: 'For bone health',
+        priority: 'critical',
+        estimatedCost: '$10-20',
+        notes: 'Dust insects before feeding'
+      },
+      {
+        id: 'lg_food_3',
+        category: 'Food',
+        item: 'Vitamin supplement',
+        description: 'Multivitamin for overall health',
+        priority: 'important',
+        estimatedCost: '$10-20',
+        notes: 'Use 1-2 times per week'
+      },
+      {
+        id: 'lg_water_1',
+        category: 'Water',
+        item: 'Shallow water dish',
+        description: 'For drinking',
+        priority: 'important',
+        estimatedCost: '$5-15',
+        notes: 'Should be shallow to prevent drowning'
+      }
+    ],
+    optional: [
+      {
+        id: 'lg_optional_1',
+        category: 'Enrichment',
+        item: 'Climbing branches',
+        description: 'For exercise and exploration',
+        priority: 'nice-to-have',
+        estimatedCost: '$10-25',
+        notes: 'Natural branches work well'
+      },
+      {
+        id: 'lg_optional_2',
+        category: 'Enrichment',
+        item: 'UVB lighting',
+        description: 'Optional for vitamin D synthesis',
+        priority: 'nice-to-have',
+        estimatedCost: '$30-60',
+        notes: 'Not essential but beneficial'
+      }
+    ],
+    aiRecommendations: [
+      'Replace heat mat every 1-2 years for safety',
+      'Clean water dish daily to prevent bacteria',
+      'Rotate between different insect types for variety',
+      'Keep a spare hide in case one needs cleaning'
+    ]
+  },
+  'Bearded Dragon': {
+    essential: [
+      {
+        id: 'bd_habitat_1',
+        category: 'Habitat',
+        item: '40+ gallon terrarium',
+        description: 'Minimum size for adult bearded dragon',
+        priority: 'critical',
+        estimatedCost: '$80-150',
+        notes: 'Larger is better for adults'
+      },
+      {
+        id: 'bd_lighting_1',
+        category: 'Lighting',
+        item: 'UVB fluorescent bulb',
+        description: 'Essential for vitamin D3 synthesis',
+        priority: 'critical',
+        estimatedCost: '$30-60',
+        notes: 'Replace every 6-12 months'
+      },
+      {
+        id: 'bd_lighting_2',
+        category: 'Lighting',
+        item: 'Heat lamp/basking bulb',
+        description: 'For basking spot temperature',
+        priority: 'critical',
+        estimatedCost: '$20-40',
+        notes: '100-150W for proper basking temperature'
+      },
+      {
+        id: 'bd_lighting_3',
+        category: 'Lighting',
+        item: 'Ceramic heat emitter',
+        description: 'For night-time heat without light',
+        priority: 'important',
+        estimatedCost: '$25-45',
+        notes: 'Only if night temps drop below 65°F'
+      },
+      {
+        id: 'bd_habitat_2',
+        category: 'Habitat',
+        item: 'Thermometer and hygrometer',
+        description: 'Monitor temperature and humidity',
+        priority: 'critical',
+        estimatedCost: '$15-30',
+        notes: 'Digital dual sensor recommended'
+      },
+      {
+        id: 'bd_substrate_1',
+        category: 'Substrate',
+        item: 'Reptile carpet or tile',
+        description: 'Safe, easy-to-clean substrate',
+        priority: 'critical',
+        estimatedCost: '$20-40',
+        notes: 'Avoid loose substrates for young dragons'
+      },
+      {
+        id: 'bd_hiding_1',
+        category: 'Hiding Spots',
+        item: 'Basking platform',
+        description: 'Elevated area for basking',
+        priority: 'critical',
+        estimatedCost: '$15-35',
+        notes: 'Should be large enough for full body'
+      },
+      {
+        id: 'bd_hiding_2',
+        category: 'Hiding Spots',
+        item: 'Cool hide',
+        description: 'Shaded area for cooling down',
+        priority: 'important',
+        estimatedCost: '$15-30',
+        notes: 'Should be large enough to fit inside'
+      },
+      {
+        id: 'bd_food_1',
+        category: 'Food',
+        item: 'Live insects (crickets, dubia roaches)',
+        description: 'Protein source for juveniles',
+        priority: 'critical',
+        estimatedCost: '$10-25/week',
+        notes: 'Size should be smaller than space between eyes'
+      },
+      {
+        id: 'bd_food_2',
+        category: 'Food',
+        item: 'Fresh vegetables and greens',
+        description: 'Main diet for adults',
+        priority: 'critical',
+        estimatedCost: '$5-15/week',
+        notes: 'Collard greens, mustard greens, squash'
+      },
+      {
+        id: 'bd_food_3',
+        category: 'Food',
+        item: 'Calcium supplement',
+        description: 'For bone health',
+        priority: 'critical',
+        estimatedCost: '$10-20',
+        notes: 'Dust insects daily for juveniles'
+      },
+      {
+        id: 'bd_water_1',
+        category: 'Water',
+        item: 'Large water dish',
+        description: 'For drinking and soaking',
+        priority: 'important',
+        estimatedCost: '$10-25',
+        notes: 'Should be large enough for soaking'
+      }
+    ],
+    optional: [
+      {
+        id: 'bd_optional_1',
+        category: 'Enrichment',
+        item: 'Climbing branches',
+        description: 'For exercise and exploration',
+        priority: 'nice-to-have',
+        estimatedCost: '$15-35',
+        notes: 'Natural branches work well'
+      },
+      {
+        id: 'bd_optional_2',
+        category: 'Enrichment',
+        item: 'Hammock',
+        description: 'Additional basking spot',
+        priority: 'nice-to-have',
+        estimatedCost: '$15-25',
+        notes: 'Many dragons enjoy hammocks'
+      }
+    ],
+    aiRecommendations: [
+      'Replace UVB bulb every 6-12 months for effectiveness',
+      'Offer fresh vegetables daily for adult dragons',
+      'Monitor basking temperature regularly',
+      'Provide variety in insect prey for juveniles'
+    ]
+  },
+  'Pacman Frog': {
+    essential: [
+      {
+        id: 'pf_habitat_1',
+        category: 'Habitat',
+        item: '10+ gallon terrarium',
+        description: 'Minimum size for adult Pacman frog',
+        priority: 'critical',
+        estimatedCost: '$30-60',
+        notes: 'Height is more important than length'
+      },
+      {
+        id: 'pf_habitat_2',
+        category: 'Habitat',
+        item: 'Secure lid',
+        description: 'Prevent escape',
+        priority: 'critical',
+        estimatedCost: '$15-25',
+        notes: 'Must be escape-proof'
+      },
+      {
+        id: 'pf_substrate_1',
+        category: 'Substrate',
+        item: 'Coconut fiber or sphagnum moss',
+        description: 'Maintains humidity',
+        priority: 'critical',
+        estimatedCost: '$10-20',
+        notes: 'Keep moist but not soaking wet'
+      },
+      {
+        id: 'pf_habitat_3',
+        category: 'Habitat',
+        item: 'Thermometer and hygrometer',
+        description: 'Monitor temperature and humidity',
+        priority: 'critical',
+        estimatedCost: '$15-30',
+        notes: 'Digital dual sensor recommended'
+      },
+      {
+        id: 'pf_lighting_1',
+        category: 'Lighting',
+        item: 'Low-wattage heat bulb',
+        description: 'Maintain proper temperature',
+        priority: 'important',
+        estimatedCost: '$15-25',
+        notes: '25-40W usually sufficient'
+      },
+      {
+        id: 'pf_hiding_1',
+        category: 'Hiding Spots',
+        item: 'Hiding spot',
+        description: 'For security and comfort',
+        priority: 'important',
+        estimatedCost: '$10-20',
+        notes: 'Half-buried in substrate works well'
+      },
+      {
+        id: 'pf_food_1',
+        category: 'Food',
+        item: 'Live insects (crickets, roaches)',
+        description: 'Primary food source',
+        priority: 'critical',
+        estimatedCost: '$8-20/week',
+        notes: 'Size should be smaller than frog\'s mouth'
+      },
+      {
+        id: 'pf_food_2',
+        category: 'Food',
+        item: 'Calcium supplement',
+        description: 'For bone health',
+        priority: 'critical',
+        estimatedCost: '$10-20',
+        notes: 'Dust insects before feeding'
+      },
+      {
+        id: 'pf_food_3',
+        category: 'Food',
+        item: 'Vitamin supplement',
+        description: 'Multivitamin for overall health',
+        priority: 'important',
+        estimatedCost: '$10-20',
+        notes: 'Use 1-2 times per week'
+      },
+      {
+        id: 'pf_water_1',
+        category: 'Water',
+        item: 'Shallow water dish',
+        description: 'For soaking and drinking',
+        priority: 'important',
+        estimatedCost: '$5-15',
+        notes: 'Should be shallow to prevent drowning'
+      }
+    ],
+    optional: [
+      {
+        id: 'pf_optional_1',
+        category: 'Enrichment',
+        item: 'Live plants',
+        description: 'Natural decoration and humidity',
+        priority: 'nice-to-have',
+        estimatedCost: '$10-25',
+        notes: 'Choose hardy, non-toxic plants'
+      }
+    ],
+    aiRecommendations: [
+      'Keep substrate consistently moist but not wet',
+      'Feed appropriately sized prey items',
+      'Clean water dish daily',
+      'Monitor humidity levels closely'
+    ]
+  },
+  'Ball Python': {
+    essential: [
+      {
+        id: 'bp_habitat_1',
+        category: 'Habitat',
+        item: '40+ gallon terrarium',
+        description: 'Minimum size for adult ball python',
+        priority: 'critical',
+        estimatedCost: '$80-150',
+        notes: 'Larger is better for adults'
+      },
+      {
+        id: 'bp_habitat_2',
+        category: 'Habitat',
+        item: 'Secure lid with locks',
+        description: 'Prevent escape',
+        priority: 'critical',
+        estimatedCost: '$20-40',
+        notes: 'Must be escape-proof'
+      },
+      {
+        id: 'bp_heating_1',
+        category: 'Heating',
+        item: 'Under-tank heating pad',
+        description: 'For belly heat',
+        priority: 'critical',
+        estimatedCost: '$25-45',
+        notes: 'Should cover 1/3 of tank bottom'
+      },
+      {
+        id: 'bp_heating_2',
+        category: 'Heating',
+        item: 'Thermostat',
+        description: 'Control heating pad temperature',
+        priority: 'critical',
+        estimatedCost: '$30-60',
+        notes: 'Essential for safety'
+      },
+      {
+        id: 'bp_habitat_3',
+        category: 'Habitat',
+        item: 'Thermometer',
+        description: 'Monitor temperature',
+        priority: 'critical',
+        estimatedCost: '$10-20',
+        notes: 'Digital thermometer recommended'
+      },
+      {
+        id: 'bp_substrate_1',
+        category: 'Substrate',
+        item: 'Coconut fiber or cypress mulch',
+        description: 'Holds humidity well',
+        priority: 'critical',
+        estimatedCost: '$15-30',
+        notes: 'Keep slightly moist'
+      },
+      {
+        id: 'bp_hiding_1',
+        category: 'Hiding Spots',
+        item: 'Warm hide',
+        description: 'Hiding spot on warm side',
+        priority: 'critical',
+        estimatedCost: '$15-30',
+        notes: 'Should be snug and secure'
+      },
+      {
+        id: 'bp_hiding_2',
+        category: 'Hiding Spots',
+        item: 'Cool hide',
+        description: 'Hiding spot on cool side',
+        priority: 'critical',
+        estimatedCost: '$15-30',
+        notes: 'Should be snug and secure'
+      },
+      {
+        id: 'bp_food_1',
+        category: 'Food',
+        item: 'Frozen/thawed rodents',
+        description: 'Primary food source',
+        priority: 'critical',
+        estimatedCost: '$5-15/week',
+        notes: 'Size should be 10-15% of snake\'s weight'
+      },
+      {
+        id: 'bp_water_1',
+        category: 'Water',
+        item: 'Large water dish',
+        description: 'For drinking and soaking',
+        priority: 'important',
+        estimatedCost: '$15-30',
+        notes: 'Large enough for snake to soak in'
+      }
+    ],
+    optional: [
+      {
+        id: 'bp_optional_1',
+        category: 'Enrichment',
+        item: 'Climbing branches',
+        description: 'For exercise and exploration',
+        priority: 'nice-to-have',
+        estimatedCost: '$15-35',
+        notes: 'Natural branches work well'
+      },
+      {
+        id: 'bp_optional_2',
+        category: 'Enrichment',
+        item: 'UVB lighting',
+        description: 'Optional for vitamin D synthesis',
+        priority: 'nice-to-have',
+        estimatedCost: '$30-60',
+        notes: 'Not essential but beneficial'
+      }
+    ],
+    aiRecommendations: [
+      'Never handle for 48 hours after feeding',
+      'Keep humidity at 50-60% (higher during shedding)',
+      'Provide two identical hides for security',
+      'Use thermostat to prevent overheating'
+    ]
+  },
+  'Corn Snake': {
+    essential: [
+      {
+        id: 'cs_habitat_1',
+        category: 'Habitat',
+        item: '20+ gallon terrarium',
+        description: 'Minimum size for adult corn snake',
+        priority: 'critical',
+        estimatedCost: '$40-80',
+        notes: 'Larger is better for adults'
+      },
+      {
+        id: 'cs_habitat_2',
+        category: 'Habitat',
+        item: 'Secure lid with locks',
+        description: 'Prevent escape',
+        priority: 'critical',
+        estimatedCost: '$20-40',
+        notes: 'Must be escape-proof'
+      },
+      {
+        id: 'cs_heating_1',
+        category: 'Heating',
+        item: 'Under-tank heating pad',
+        description: 'For belly heat',
+        priority: 'critical',
+        estimatedCost: '$25-45',
+        notes: 'Should cover 1/3 of tank bottom'
+      },
+      {
+        id: 'cs_heating_2',
+        category: 'Heating',
+        item: 'Thermostat',
+        description: 'Control heating pad temperature',
+        priority: 'critical',
+        estimatedCost: '$30-60',
+        notes: 'Essential for safety'
+      },
+      {
+        id: 'cs_habitat_3',
+        category: 'Habitat',
+        item: 'Thermometer',
+        description: 'Monitor temperature',
+        priority: 'critical',
+        estimatedCost: '$10-20',
+        notes: 'Digital thermometer recommended'
+      },
+      {
+        id: 'cs_substrate_1',
+        category: 'Substrate',
+        item: 'Aspen shavings or cypress mulch',
+        description: 'Good for burrowing',
+        priority: 'critical',
+        estimatedCost: '$15-30',
+        notes: 'Keep dry'
+      },
+      {
+        id: 'cs_hiding_1',
+        category: 'Hiding Spots',
+        item: 'Warm hide',
+        description: 'Hiding spot on warm side',
+        priority: 'critical',
+        estimatedCost: '$15-30',
+        notes: 'Should be snug and secure'
+      },
+      {
+        id: 'cs_hiding_2',
+        category: 'Hiding Spots',
+        item: 'Cool hide',
+        description: 'Hiding spot on cool side',
+        priority: 'critical',
+        estimatedCost: '$15-30',
+        notes: 'Should be snug and secure'
+      },
+      {
+        id: 'cs_food_1',
+        category: 'Food',
+        item: 'Frozen/thawed rodents',
+        description: 'Primary food source',
+        priority: 'critical',
+        estimatedCost: '$5-15/week',
+        notes: 'Size should be 10-15% of snake\'s weight'
+      },
+      {
+        id: 'cs_water_1',
+        category: 'Water',
+        item: 'Water dish',
+        description: 'For drinking',
+        priority: 'important',
+        estimatedCost: '$10-20',
+        notes: 'Change water daily'
+      }
+    ],
+    optional: [
+      {
+        id: 'cs_optional_1',
+        category: 'Enrichment',
+        item: 'Climbing branches',
+        description: 'For exercise and exploration',
+        priority: 'nice-to-have',
+        estimatedCost: '$15-35',
+        notes: 'Natural branches work well'
+      },
+      {
+        id: 'cs_optional_2',
+        category: 'Enrichment',
+        item: 'UVB lighting',
+        description: 'Optional for vitamin D synthesis',
+        priority: 'nice-to-have',
+        estimatedCost: '$30-60',
+        notes: 'Not essential but beneficial'
+      }
+    ],
+    aiRecommendations: [
+      'Secure all enclosure openings tightly',
+      'Never handle for 24-48 hours after feeding',
+      'Provide multiple hiding spots for security',
+      'Monitor temperature gradients carefully'
+    ]
+  }
+};
+
+// Get checklist for a specific species
+export const getSpeciesChecklist = (speciesName) => {
+  return careChecklistData[speciesName] || null;
+};
+
+// Get all available species for checklists
+export const getChecklistSpecies = () => {
+  return Object.keys(careChecklistData);
+};
+
+// Calculate total estimated cost for a species
+export const getTotalEstimatedCost = (speciesName) => {
+  const checklist = getSpeciesChecklist(speciesName);
+  if (!checklist) return null;
+
+  const essentialCosts = checklist.essential.map(item => {
+    const cost = item.estimatedCost.replace(/[^0-9]/g, '');
+    return parseInt(cost) || 0;
+  });
+
+  const totalEssential = essentialCosts.reduce((sum, cost) => sum + cost, 0);
+  
+  return {
+    essential: totalEssential,
+    range: `$${totalEssential}-${Math.round(totalEssential * 1.3)}`,
+    breakdown: {
+      habitat: checklist.essential.filter(item => item.category === 'Habitat').length,
+      heating: checklist.essential.filter(item => item.category === 'Heating' || item.category === 'Lighting').length,
+      substrate: checklist.essential.filter(item => item.category === 'Substrate').length,
+      hiding: checklist.essential.filter(item => item.category === 'Hiding Spots').length,
+      food: checklist.essential.filter(item => item.category === 'Food').length,
+      water: checklist.essential.filter(item => item.category === 'Water').length
+    }
+  };
+};
+
+// Get checklist by priority
+export const getChecklistByPriority = (speciesName, priority = 'all') => {
+  const checklist = getSpeciesChecklist(speciesName);
+  if (!checklist) return null;
+
+  if (priority === 'all') {
+    return {
+      essential: checklist.essential,
+      optional: checklist.optional
+    };
+  }
+
+  return {
+    essential: checklist.essential.filter(item => item.priority === priority),
+    optional: checklist.optional.filter(item => item.priority === priority)
+  };
+};
+
+// Get checklist by category
+export const getChecklistByCategory = (speciesName, category) => {
+  const checklist = getSpeciesChecklist(speciesName);
+  if (!checklist) return null;
+
+  return {
+    essential: checklist.essential.filter(item => item.category === category),
+    optional: checklist.optional.filter(item => item.category === category)
+  };
+};
