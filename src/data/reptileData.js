@@ -279,5 +279,391 @@ export const reptileData = [
       "Maintain water quality to prevent illness",
       "UVB is essential for shell health"
     ]
+  },
+  {
+    id: 9,
+    name: "Green Anole",
+    type: "Lizard",
+    emoji: "🦎",
+    habitat: {
+      temperature: "75-85°F (24-29°C) with 90-95°F (32-35°C) basking",
+      humidity: "60-80%",
+      enclosureSize: "10+ gallon for adults",
+      substrate: "Coconut fiber, sphagnum moss, or bioactive"
+    },
+    diet: {
+      primary: "Small insects (crickets, fruit flies, small roaches)",
+      frequency: "Daily for juveniles; every 1-2 days for adults",
+      supplements: "Calcium with D3 on insects",
+      water: "Mist enclosure; shallow dish optional"
+    },
+    careTips: [
+      "Provide plenty of climbing branches and foliage",
+      "Use UVB lighting for proper calcium absorption",
+      "Keep humidity high with regular misting",
+      "Handle minimally as they're easily stressed"
+    ],
+    funFacts: [
+      "Can change color from green to brown",
+      "Males have a red dewlap for display",
+      "Very active and entertaining to watch",
+      "Native to southeastern United States"
+    ],
+    warnings: [
+      "Avoid handling when stressed",
+      "Keep away from other anole species",
+      "Monitor for signs of stress or illness"
+    ]
+  },
+  {
+    id: 10,
+    name: "Blue-Tongued Skink",
+    type: "Lizard",
+    emoji: "🦎",
+    habitat: {
+      temperature: "75-85°F (24-29°C) with 95-105°F (35-40°C) basking",
+      humidity: "40-60%",
+      enclosureSize: "40+ gallon for adults",
+      substrate: "Cypress mulch, coconut fiber, or bioactive"
+    },
+    diet: {
+      primary: "Omnivorous - insects, vegetables, fruits, occasional protein",
+      frequency: "Every 2-3 days",
+      supplements: "Calcium with D3 and multivitamin",
+      water: "Shallow dish; mist vegetables for hydration"
+    },
+    careTips: [
+      "Provide large enclosure with hiding spots",
+      "Use UVB lighting for proper health",
+      "Offer varied diet including vegetables",
+      "Handle regularly to build trust"
+    ],
+    funFacts: [
+      "Named for their distinctive blue tongue",
+      "Very intelligent and can learn tricks",
+      "Give birth to live young",
+      "Can live 20+ years in captivity"
+    ],
+    warnings: [
+      "Avoid high humidity which can cause respiratory issues",
+      "Don't feed dog or cat food",
+      "Provide proper UVB lighting"
+    ]
+  },
+  {
+    id: 11,
+    name: "Milk Snake",
+    type: "Snake",
+    emoji: "🐍",
+    habitat: {
+      temperature: "75-85°F (24-29°C) with 85-90°F (29-32°C) basking",
+      humidity: "40-60%",
+      enclosureSize: "20+ gallon for adults",
+      substrate: "Aspen shavings, cypress mulch, or paper towels"
+    },
+    diet: {
+      primary: "Frozen/thawed mice or rats",
+      frequency: "Every 5-7 days for juveniles; 7-10 days for adults",
+      supplements: "Not typically needed",
+      water: "Fresh water dish; change regularly"
+    },
+    careTips: [
+      "Provide secure hiding spots",
+      "Use under-tank heating for belly heat",
+      "Handle gently and support body fully",
+      "Feed appropriately sized prey"
+    ],
+    funFacts: [
+      "Beautiful color variations and patterns",
+      "Non-venomous and generally docile",
+      "Good beginner snake species",
+      "Can live 15-20 years"
+    ],
+    warnings: [
+      "Never feed live prey",
+      "Avoid handling for 48 hours after feeding",
+      "Keep enclosure secure to prevent escape"
+    ]
+  },
+  {
+    id: 12,
+    name: "Fire-Bellied Toad",
+    type: "Amphibian",
+    emoji: "🐸",
+    habitat: {
+      temperature: "70-80°F (21-27°C)",
+      humidity: "70-80%",
+      enclosureSize: "10+ gallon for small groups",
+      substrate: "Coconut fiber or sphagnum moss"
+    },
+    diet: {
+      primary: "Small insects (crickets, fruit flies, small roaches)",
+      frequency: "Every 2-3 days",
+      supplements: "Calcium powder on insects",
+      water: "Shallow water dish; keep substrate moist"
+    },
+    careTips: [
+      "Keep substrate consistently moist",
+      "Provide both land and water areas",
+      "Use gentle heating if needed",
+      "Handle minimally to avoid stress"
+    ],
+    funFacts: [
+      "Bright orange/red belly as warning display",
+      "Active during day and night",
+      "Can live in small groups",
+      "Good for beginners"
+    ],
+    warnings: [
+      "Avoid handling with bare hands",
+      "Keep away from other species",
+      "Monitor humidity levels carefully"
+    ]
+  },
+  {
+    id: 13,
+    name: "Uromastyx",
+    type: "Lizard",
+    emoji: "🦎",
+    habitat: {
+      temperature: "80-90°F (27-32°C) with 110-120°F (43-49°C) basking",
+      humidity: "20-30%",
+      enclosureSize: "40+ gallon for adults",
+      substrate: "Play sand, calcium sand, or tile"
+    },
+    diet: {
+      primary: "Vegetables, flowers, and occasional insects",
+      frequency: "Daily vegetables; insects 1-2x/week",
+      supplements: "Calcium with D3 and multivitamin",
+      water: "Mist vegetables; shallow dish optional"
+    },
+    careTips: [
+      "Provide very hot basking area",
+      "Use strong UVB lighting",
+      "Offer varied vegetables and flowers",
+      "Keep humidity very low"
+    ],
+    funFacts: [
+      "Also called spiny-tailed lizards",
+      "Herbivorous as adults",
+      "Can live 15-20 years",
+      "Native to desert regions"
+    ],
+    warnings: [
+      "Avoid high humidity",
+      "Don't use loose substrates for juveniles",
+      "Provide very hot basking temperatures"
+    ]
+  },
+  {
+    id: 14,
+    name: "Hognose Snake",
+    type: "Snake",
+    emoji: "🐍",
+    habitat: {
+      temperature: "75-85°F (24-29°C) with 85-90°F (29-32°C) basking",
+      humidity: "30-50%",
+      enclosureSize: "20+ gallon for adults",
+      substrate: "Aspen shavings, cypress mulch, or sand"
+    },
+    diet: {
+      primary: "Frozen/thawed mice or toads",
+      frequency: "Every 5-7 days for juveniles; 7-10 days for adults",
+      supplements: "Not typically needed",
+      water: "Fresh water dish; change regularly"
+    },
+    careTips: [
+      "Provide deep substrate for burrowing",
+      "Use under-tank heating",
+      "Handle gently and regularly",
+      "Offer appropriately sized prey"
+    ],
+    funFacts: [
+      "Upturned snout for digging",
+      "Play dead when threatened",
+      "Generally docile temperament",
+      "Good beginner snake"
+    ],
+    warnings: [
+      "Never feed live prey",
+      "Avoid handling after feeding",
+      "Keep enclosure secure"
+    ]
+  },
+  {
+    id: 15,
+    name: "Chameleon",
+    type: "Lizard",
+    emoji: "🦎",
+    habitat: {
+      temperature: "70-80°F (21-27°C) with 85-95°F (29-35°C) basking",
+      humidity: "60-80%",
+      enclosureSize: "18x18x36 for adults",
+      substrate: "Bare bottom or paper towels"
+    },
+    diet: {
+      primary: "Insects (crickets, roaches, flies, worms)",
+      frequency: "Daily for juveniles; every 1-2 days for adults",
+      supplements: "Calcium with D3 and multivitamin",
+      water: "Mist enclosure 2-3x daily; dripper system"
+    },
+    careTips: [
+      "Provide vertical climbing space",
+      "Use UVB lighting and misting system",
+      "Handle minimally to reduce stress",
+      "Offer varied insect diet"
+    ],
+    funFacts: [
+      "Can change colors for communication",
+      "Eyes move independently",
+      "Long tongue for catching prey",
+      "Very sensitive to stress"
+    ],
+    warnings: [
+      "Avoid excessive handling",
+      "Keep humidity consistent",
+      "Provide proper UVB lighting",
+      "Monitor for signs of stress"
+    ]
+  },
+  {
+    id: 16,
+    name: "Tiger Salamander",
+    type: "Amphibian",
+    emoji: "🦎",
+    habitat: {
+      temperature: "60-70°F (16-21°C)",
+      humidity: "70-80%",
+      enclosureSize: "20+ gallon for adults",
+      substrate: "Coconut fiber, sphagnum moss, or bioactive"
+    },
+    diet: {
+      primary: "Insects, worms, and small vertebrates",
+      frequency: "Every 2-3 days",
+      supplements: "Calcium powder on insects",
+      water: "Shallow dish; keep substrate moist"
+    },
+    careTips: [
+      "Keep temperature cool",
+      "Maintain high humidity",
+      "Provide hiding spots",
+      "Handle minimally"
+    ],
+    funFacts: [
+      "Largest land salamander in North America",
+      "Can live 15+ years",
+      "Excellent swimmers",
+      "Active during breeding season"
+    ],
+    warnings: [
+      "Avoid high temperatures",
+      "Don't handle with bare hands",
+      "Keep away from other species"
+    ]
+  },
+  {
+    id: 17,
+    name: "Gargoyle Gecko",
+    type: "Lizard",
+    emoji: "🦎",
+    habitat: {
+      temperature: "72-80°F (22-27°C)",
+      humidity: "60-80%",
+      enclosureSize: "18x18x24 for adults",
+      substrate: "Coconut fiber, paper towels, or bioactive"
+    },
+    diet: {
+      primary: "Commercial crested gecko diet + insects",
+      frequency: "CGD 3-4x/week; insects 1-2x/week",
+      supplements: "Calcium with D3 on insects",
+      water: "Mist enclosure nightly; shallow dish optional"
+    },
+    careTips: [
+      "Provide vertical climbing space",
+      "Use ambient heating, not basking lights",
+      "Offer ledges and hides at multiple heights",
+      "Keep humidity consistent"
+    ],
+    funFacts: [
+      "Named for their bumpy, gargoyle-like appearance",
+      "Can vocalize with chirps",
+      "Nocturnal and arboreal",
+      "Many color morphs available"
+    ],
+    warnings: [
+      "Avoid high heat",
+      "Don't handle excessively",
+      "Keep humidity consistent"
+    ]
+  },
+  {
+    id: 18,
+    name: "Kingsnake",
+    type: "Snake",
+    emoji: "🐍",
+    habitat: {
+      temperature: "75-85°F (24-29°C) with 85-90°F (29-32°C) basking",
+      humidity: "40-60%",
+      enclosureSize: "20+ gallon for adults",
+      substrate: "Aspen shavings, cypress mulch, or paper towels"
+    },
+    diet: {
+      primary: "Frozen/thawed mice or rats",
+      frequency: "Every 5-7 days for juveniles; 7-10 days for adults",
+      supplements: "Not typically needed",
+      water: "Fresh water dish; change regularly"
+    },
+    careTips: [
+      "Provide secure hiding spots",
+      "Use under-tank heating",
+      "Handle gently and regularly",
+      "Feed appropriately sized prey"
+    ],
+    funFacts: [
+      "Named for eating other snakes",
+      "Generally docile temperament",
+      "Many beautiful color patterns",
+      "Can live 20+ years"
+    ],
+    warnings: [
+      "Never feed live prey",
+      "Avoid handling after feeding",
+      "Keep enclosure secure"
+    ]
+  },
+  {
+    id: 19,
+    name: "Dart Frog",
+    type: "Amphibian",
+    emoji: "🐸",
+    habitat: {
+      temperature: "70-80°F (21-27°C)",
+      humidity: "80-100%",
+      enclosureSize: "10+ gallon for small groups",
+      substrate: "Coconut fiber, sphagnum moss, or bioactive"
+    },
+    diet: {
+      primary: "Small insects (fruit flies, springtails, small crickets)",
+      frequency: "Daily",
+      supplements: "Calcium powder on insects",
+      water: "Mist enclosure 2-3x daily"
+    },
+    careTips: [
+      "Keep humidity very high",
+      "Provide plenty of plants and hiding spots",
+      "Use gentle heating if needed",
+      "Handle minimally"
+    ],
+    funFacts: [
+      "Bright colors warn of toxicity",
+      "Very small and active",
+      "Excellent for bioactive setups",
+      "Can live in small groups"
+    ],
+    warnings: [
+      "Avoid handling with bare hands",
+      "Keep away from other species",
+      "Monitor humidity carefully"
+    ]
   }
 ];

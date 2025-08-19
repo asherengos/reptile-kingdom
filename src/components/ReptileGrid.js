@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { reptileData } from '../data/reptileData';
 
 function ReptileGrid({ onSpeciesSelect }) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedType, setSelectedType] = useState('all');
+
   const handleKeyDown = (event, species) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
@@ -9,19 +12,16 @@ function ReptileGrid({ onSpeciesSelect }) {
     }
   };
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80; // Account for sticky nav height
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
+  // Filter species based on search and type
+  const filteredSpecies = reptileData.filter(species => {
+    const matchesSearch = species.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         species.type.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesType = selectedType === 'all' || species.type === selectedType;
+    return matchesSearch && matchesType;
+  });
+
+  // Get unique types for filter
+  const types = ['all', ...new Set(reptileData.map(species => species.type))];
 
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -52,14 +52,51 @@ function ReptileGrid({ onSpeciesSelect }) {
           </p>
         </div>
       </section>
+
+      {/* Search and Filter Controls */}
+      <div className="mb-8 md:mb-10">
+        <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-6 border border-white/30 shadow-xl max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+            {/* Search Bar */}
+            <div className="relative flex-1 max-w-md">
+              <input
+                type="text"
+                placeholder="Search species or type..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-4 py-3 bg-white/90 backdrop-blur-sm border border-white/50 rounded-xl text-gray-800 placeholder-gray-500 focus:ring-2 focus:ring-reptile-green focus:border-transparent outline-none shadow-lg"
+              />
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">🔍</span>
+            </div>
+
+            {/* Type Filter */}
+            <select
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+              className="px-4 py-3 bg-white/90 backdrop-blur-sm border border-white/50 rounded-xl text-gray-800 focus:ring-2 focus:ring-reptile-green focus:border-transparent outline-none shadow-lg"
+            >
+              {types.map(type => (
+                <option key={type} value={type}>
+                  {type === 'all' ? 'All Types' : type}
+                </option>
+              ))}
+            </select>
+
+            {/* Results Count */}
+            <div className="text-white/90 font-medium">
+              {filteredSpecies.length} of {reptileData.length} species
+            </div>
+          </div>
+        </div>
+      </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 mb-16 md:mb-20">
-        {reptileData.map((species, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-20">
+        {filteredSpecies.map((species, index) => (
           <button
             key={species.id}
             onClick={() => onSpeciesSelect(species)}
             onKeyDown={(e) => handleKeyDown(e, species)}
-            className="species-button group relative overflow-hidden focus-visible p-6 md:p-8"
+            className="species-button group relative overflow-hidden focus-visible p-4 md:p-6"
             aria-label={`Learn about ${species.name}, a ${species.type.toLowerCase()}`}
             title={`Click to learn about ${species.name}`}
             tabIndex={0}
@@ -76,7 +113,7 @@ function ReptileGrid({ onSpeciesSelect }) {
                 <img
                   src={`/images/${species.name.toLowerCase().replace(/\s+/g, '-')}.jpg`}
                   alt={`${species.name} - ${species.type}`}
-                  className="w-24 h-24 md:w-32 md:h-32 mx-auto object-cover rounded-2xl image-card-shadow border-2 border-white/30 creature-image"
+                  className="w-20 h-20 md:w-24 md:h-24 mx-auto object-cover rounded-2xl image-card-shadow border-2 border-white/30 creature-image"
                   onError={(e) => {
                     // Try numbered fallback, then SVG, then emoji
                     const img = e.target;
@@ -104,14 +141,14 @@ function ReptileGrid({ onSpeciesSelect }) {
                 </div>
                 {/* Fallback emoji */}
                 <div 
-                  className="text-5xl md:text-6xl drop-shadow-lg hidden"
+                  className="text-4xl md:text-5xl drop-shadow-lg hidden"
                   role="img"
                   aria-label={`${species.name} emoji`}
                 >
                   {species.emoji}
                 </div>
               </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-shadow">{species.name}</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-shadow">{species.name}</h3>
               <p className="text-sm md:text-base opacity-90 mb-3 md:mb-4 font-medium">{species.type}</p>
               
               {/* Quick habitat preview */}
@@ -123,6 +160,15 @@ function ReptileGrid({ onSpeciesSelect }) {
           </button>
         ))}
       </div>
+
+      {/* No Results Message */}
+      {filteredSpecies.length === 0 && (
+        <div className="text-center py-12">
+          <div className="text-6xl mb-4">🔍</div>
+          <h3 className="text-2xl font-bold text-white mb-2">No species found</h3>
+          <p className="text-white/80">Try adjusting your search terms or filter selection</p>
+        </div>
+      )}
       
       {/* Care Guide Section */}
       <section 
