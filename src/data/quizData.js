@@ -42,6 +42,32 @@ export const quizData = {
       explanation: 'Fine sand can cause impaction if ingested, which is dangerous for young geckos.',
       funFact: '⚠️ Young geckos are more likely to accidentally ingest substrate while hunting, so safe options are crucial!'
     }
+    ,{
+      id: 'lg_4',
+      question: 'What humidity range do Leopard Geckos prefer?',
+      options: [
+        '10-20%',
+        '30-40%',
+        '60-70%',
+        '80-90%'
+      ],
+      correctAnswer: 1,
+      explanation: 'Leopard Geckos do best at 30-40% humidity with access to a moist hide for shedding.',
+      funFact: '🌵 A moist hide helps them shed cleanly without raising whole-tank humidity.'
+    },
+    {
+      id: 'lg_5',
+      question: 'How many hides should a Leopard Gecko have?',
+      options: [
+        'One warm-side hide only',
+        'At least two (warm and cool)',
+        'None if there are decorations',
+        'Only a moist hide'
+      ],
+      correctAnswer: 1,
+      explanation: 'Provide at least two hides (warm and cool), plus a moist hide when possible.',
+      funFact: '🏠 Multiple hides let geckos thermoregulate comfortably.'
+    }
   ],
   'Bearded Dragon': [
     {
@@ -82,6 +108,32 @@ export const quizData = {
       correctAnswer: 3,
       explanation: 'Bearded Dragons use arm waving, head bobbing, and even color changes to communicate with each other.',
       funFact: '👋 Arm waving is often a sign of submission, while head bobbing can indicate dominance or territorial behavior!'
+    }
+    ,{
+      id: 'bd_4',
+      question: 'What basking temperature should an adult Bearded Dragon have?',
+      options: [
+        '80-90°F (27-32°C)',
+        '95-105°F (35-40°C)',
+        '65-75°F (18-24°C)',
+        '110-120°F (43-49°C)'
+      ],
+      correctAnswer: 1,
+      explanation: 'Adults should have a basking spot around 95-105°F for proper digestion.',
+      funFact: '🌞 They often darken their backs to absorb more heat.'
+    },
+    {
+      id: 'bd_5',
+      question: 'How often should UVB bulbs typically be replaced?',
+      options: [
+        'Every 1-2 months',
+        'Every 3 months',
+        'Every 6-12 months (per manufacturer)',
+        'Never, UVB is permanent'
+      ],
+      correctAnswer: 2,
+      explanation: 'Most UVB bulbs lose output over time and should be replaced about every 6–12 months.',
+      funFact: '💡 Even if the bulb lights, UVB output may have dropped.'
     }
   ],
   'Pacman Frog': [
@@ -124,6 +176,32 @@ export const quizData = {
       explanation: 'Pacman Frogs should be handled minimally as they\'re sensitive to oils on human skin and stress easily.',
       funFact: '🤲 Pacman Frogs have very sensitive skin that can absorb chemicals and oils, making handling risky!'
     }
+    ,{
+      id: 'pf_4',
+      question: 'What substrate is commonly recommended for Pacman Frogs?',
+      options: [
+        'Sand',
+        'Coconut fiber or sphagnum moss',
+        'Gravel',
+        'Wood chips only'
+      ],
+      correctAnswer: 1,
+      explanation: 'Coconut fiber or sphagnum moss holds moisture well and supports high humidity.',
+      funFact: '🌿 They love to burrow into damp substrate and ambush prey.'
+    },
+    {
+      id: 'pf_5',
+      question: 'What type of water dish should Pacman Frogs have?',
+      options: [
+        'Very deep bowl',
+        'Shallow dish they can easily exit',
+        'Running water only',
+        'No water dish required'
+      ],
+      correctAnswer: 1,
+      explanation: 'Provide a shallow, easy-exit dish to prevent drowning and allow safe soaking.',
+      funFact: '💧 They absorb water through their skin rather than drinking like mammals.'
+    }
   ],
   'Ball Python': [
     {
@@ -165,6 +243,32 @@ export const quizData = {
       explanation: 'Ball Pythons can go several months without eating, especially during breeding season or when stressed.',
       funFact: '⏰ This ability to fast for long periods helps them survive in the wild when food is scarce!'
     }
+    ,{
+      id: 'bp_4',
+      question: 'What humidity range is appropriate for Ball Pythons?',
+      options: [
+        '20-30%',
+        '40-50%',
+        '50-60%',
+        '80-90%'
+      ],
+      correctAnswer: 2,
+      explanation: 'Ball Pythons generally do best at 50–60% humidity, slightly higher during shed.',
+      funFact: '💦 Providing a humid hide helps with clean sheds.'
+    },
+    {
+      id: 'bp_5',
+      question: 'How long should you wait before handling after a Ball Python eats?',
+      options: [
+        'Immediately',
+        '6-12 hours',
+        '24-48 hours',
+        'One week'
+      ],
+      correctAnswer: 2,
+      explanation: 'Waiting 24–48 hours reduces the risk of regurgitation and stress.',
+      funFact: '⏳ Patience after feeding keeps digestion smooth.'
+    }
   ],
   'Corn Snake': [
     {
@@ -205,6 +309,32 @@ export const quizData = {
       correctAnswer: 2,
       explanation: 'Aspen shavings or cypress mulch provide good burrowing opportunities and are safe if accidentally ingested.',
       funFact: '🌱 Corn Snakes love to burrow, so providing substrate that allows this natural behavior is important!'
+    }
+    ,{
+      id: 'cs_4',
+      question: 'How often should an adult Corn Snake typically be fed?',
+      options: [
+        'Every day',
+        'Every 2-3 days',
+        'Every 7-10 days',
+        'Once per month'
+      ],
+      correctAnswer: 2,
+      explanation: 'Adult Corn Snakes commonly eat every 7–10 days depending on size and temperature.',
+      funFact: '🍽️ Overfeeding can lead to obesity—monitor body condition.'
+    },
+    {
+      id: 'cs_5',
+      question: 'A good temperature gradient for a Corn Snake enclosure is…',
+      options: [
+        'Warm 95°F / Cool 85°F',
+        'Warm 85°F / Cool 75°F',
+        'Warm 70°F / Cool 60°F',
+        'Same temperature everywhere'
+      ],
+      correctAnswer: 1,
+      explanation: 'Aim for ~85°F warm side and ~75°F cool side to allow thermoregulation.',
+      funFact: '🌡️ Providing gradients lets snakes choose their ideal body temperature.'
     }
   ]
 };
@@ -263,12 +393,24 @@ export const getQuizSpecies = () => {
 };
 
 // Get random quiz question
+// Deterministic non-repeating question picker with species‑specific bias
 export const getRandomQuiz = (speciesName = null) => {
-  if (speciesName && quizData[speciesName]) {
-    const speciesQuiz = quizData[speciesName];
-    return speciesQuiz[Math.floor(Math.random() * speciesQuiz.length)];
-  }
-  
-  // Return random general question
-  return generalQuiz[Math.floor(Math.random() * generalQuiz.length)];
+  // Track asked questions in session storage by species
+  const key = speciesName ? `asked_${speciesName}` : 'asked_general';
+  let asked = [];
+  try {
+    asked = JSON.parse(sessionStorage.getItem(key) || '[]');
+  } catch {}
+
+  const pool = speciesName && quizData[speciesName] ? quizData[speciesName] : generalQuiz;
+  const available = pool.filter(q => !asked.includes(q.id));
+
+  const pickFrom = available.length > 0 ? available : pool; // if exhausted, reset
+  const next = pickFrom[Math.floor(Math.random() * pickFrom.length)];
+
+  // Persist asked list (cap to pool length)
+  const newAsked = available.length > 0 ? [...asked, next.id] : [next.id];
+  try { sessionStorage.setItem(key, JSON.stringify(newAsked)); } catch {}
+
+  return next;
 };
