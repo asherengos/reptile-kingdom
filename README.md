@@ -14,44 +14,36 @@ An interactive tablet application designed to educate Petco customers about rept
 - **Local AI Processing**: All AI responses generated locally using Ollama
 - **Modular Architecture**: Clean, expandable codebase for future features
 
-## 🚀 Getting Started
+## 🏷️ Category
+Best Local Agent — runs offline with GPT-OSS and provides in-store assistance.
 
-### Prerequisites
-
-- Node.js (version 14 or higher)
-- npm or yarn package manager
-- **Ollama** for AI features (see [OLLAMA_SETUP.md](./OLLAMA_SETUP.md))
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd reptile-info-tablet
-```
-
-2. Install dependencies:
+## 🚀 Quick Start
+1) Install Node.js (v16+)
+2) Clone and install deps:
 ```bash
 npm install
 ```
+3) AI (GPT-OSS via Ollama):
+```bash
+# install ollama from https://ollama.ai
+ollama pull gpt-oss:20b
+ollama serve
+```
+4) Configure provider (optional):
+- Copy `src/config.example` to `.env` and adjust values
+- Default provider is `ollama`
 
-3. **Set up Ollama** (for AI features):
-   - Follow the [Ollama Setup Guide](./OLLAMA_SETUP.md)
-   - Download a model: `ollama pull llama2:7b`
-   - Start the service: `ollama serve`
-
-4. Start the development server:
+5) Run the app:
 ```bash
 npm start
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+## 🔗 Demo Links
+- Live Demo (Netlify): [https://reptilerocks.netlify.app/](https://reptilerocks.netlify.app/)
+- Demo Video (YouTube): <ADD_LINK_AFTER_UPLOAD>
 
-### Building for Production
-
-```bash
-npm run build
-```
+## 🖼️ Image Sources
+Photos are sourced from stock sites (Unsplash/Pexels) and used under their licenses. See IMAGE_DOWNLOAD_GUIDE.md for filenames; add attributions here as we finalize the set.
 
 ## 🏗️ Project Structure
 
