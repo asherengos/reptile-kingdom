@@ -637,16 +637,67 @@ export const getTotalEstimatedCost = (speciesName) => {
   const checklist = getSpeciesChecklist(speciesName);
   if (!checklist) return null;
 
-  const essentialCosts = checklist.essential.map(item => {
-    const cost = item.estimatedCost.replace(/[^0-9]/g, '');
-    return parseInt(cost) || 0;
+  // Helper to parse a cost string like "$30-60", "$15", "$5-15/week"
+  const parseCostRange = (costStr) => {
+    if (!costStr) return null;
+    const isRecurring = /\/(week|month|day)|per\s+(week|month|day)/i.test(costStr);
+    if (isRecurring) return null; // exclude recurring food costs from initial setup
+
+    const match = costStr.match(/\$?\s*(\d+)(?:\s*-\s*(\d+))?/);
+    if (!match) return null;
+    const min = parseInt(match[1], 10) || 0;
+    const max = match[2] ? parseInt(match[2], 10) : min;
+    return { min, max };
+  };
+
+  // Parse recurring costs and convert to approximate monthly
+  const parseRecurringMonthly = (costStr) => {
+    if (!costStr) return null;
+    const m = costStr.match(/\$?\s*(\d+)(?:\s*-\s*(\d+))?\s*(?:\/(week|month|day)|per\s+(week|month|day))/i);
+    if (!m) return null;
+    const min = parseInt(m[1], 10) || 0;
+    const max = m[2] ? parseInt(m[2], 10) : min;
+    const unit = (m[3] || m[4] || '').toLowerCase();
+    const factor = unit === 'week' ? 4 : unit === 'day' ? 30 : 1; // rough monthly
+    return { min: min * factor, max: max * factor };
+  };
+
+  let minTotal = 0;
+  let maxTotal = 0;
+  let monthlyMin = 0;
+  let monthlyMax = 0;
+
+  checklist.essential.forEach(item => {
+    const range = parseCostRange(item.estimatedCost);
+    if (range) {
+      minTotal += range.min;
+      maxTotal += range.max;
+    }
+    const rec = parseRecurringMonthly(item.estimatedCost);
+    if (rec) {
+      monthlyMin += rec.min;
+      monthlyMax += rec.max;
+    }
   });
 
-  const totalEssential = essentialCosts.reduce((sum, cost) => sum + cost, 0);
-  
+  // Include recurring optional costs (e.g., supplements if marked per week/month)
+  checklist.optional.forEach(item => {
+    const rec = parseRecurringMonthly(item.estimatedCost);
+    if (rec) {
+      monthlyMin += rec.min;
+      monthlyMax += rec.max;
+    }
+  });
+
+  const essentialCount = checklist.essential.length;
+  const monthlyLabel = monthlyMin === monthlyMax ? `$${monthlyMin}` : `$${monthlyMin}-${monthlyMax}`;
+
   return {
-    essential: totalEssential,
-    range: `$${totalEssential}-${Math.round(totalEssential * 1.3)}`,
+    // number of essential items, used by UI
+    essential: essentialCount,
+    // total estimated initial setup range
+    range: `$${minTotal}-${maxTotal}`,
+    monthly: monthlyLabel,
     breakdown: {
       habitat: checklist.essential.filter(item => item.category === 'Habitat').length,
       heating: checklist.essential.filter(item => item.category === 'Heating' || item.category === 'Lighting').length,

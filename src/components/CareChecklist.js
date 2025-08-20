@@ -575,7 +575,12 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
               </div>
               <div className="bg-white rounded-xl p-4 shadow-lg">
                 <div className="text-2xl font-bold text-purple-600">{costBreakdown.range}</div>
-                <div className="text-sm text-gray-600">Estimated Cost</div>
+                <div className="text-sm text-gray-600">Setup Cost</div>
+                {costBreakdown.monthly && (
+                  <div className="mt-2 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200">
+                    💰 Monthly: {costBreakdown.monthly}
+                  </div>
+                )}
               </div>
               <div className="bg-white rounded-xl p-4 shadow-lg">
                 <div className="text-2xl font-bold text-orange-600">{checkedItems.size}</div>
