@@ -51,44 +51,36 @@ function App() {
       
       <main className="py-8">
         <ReptileGrid onSpeciesSelect={handleSpeciesSelect} />
-        
-        {/* Quest 10 & 11 Testing Controls */}
-        <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8">
-          <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-6 border border-white/30 shadow-xl">
-            <h3 className="text-2xl font-bold text-white mb-4 text-center">
-              🧪 Quest 10 & 🌱 Quest 11 & 🖼️ Quest 12: Testing, Growth & Image Enchantment
-            </h3>
-            <p className="text-white/90 text-center mb-6">
-              Ready to test the magical artifact, ensure eternal growth, and experience the visual enchantment of real imagery!
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button
-                onClick={() => setShowUserFeedback(true)}
-                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 
-                         text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 
-                         transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                📝 Collect User Feedback
-              </button>
-              <button
-                onClick={() => setShowTestingDashboard(true)}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 
-                         text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 
-                         transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                📊 View Testing Dashboard
-              </button>
-              <button
-                onClick={() => setShowEternalGrowth(true)}
-                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 
-                         text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 
-                         transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                🌱 Eternal Growth Dashboard
-              </button>
+        {/* Admin controls hidden by default. Enable for internal builds only. */}
+        {process.env.REACT_APP_SHOW_ADMIN === 'true' && (
+          <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8">
+            <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-6 border border-white/30 shadow-xl">
+              <h3 className="text-2xl font-bold text-white mb-4 text-center">
+                Admin: Testing, Growth & Image Enchantment
+              </h3>
+              <div className="flex flex-wrap justify-center gap-4">
+                <button
+                  onClick={() => setShowUserFeedback(true)}
+                  className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-semibold px-6 py-3 rounded-xl"
+                >
+                  📝 Collect User Feedback
+                </button>
+                <button
+                  onClick={() => setShowTestingDashboard(true)}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold px-6 py-3 rounded-xl"
+                >
+                  📊 View Testing Dashboard
+                </button>
+                <button
+                  onClick={() => setShowEternalGrowth(true)}
+                  className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold px-6 py-3 rounded-xl"
+                >
+                  🌱 Eternal Growth Dashboard
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </main>
 
       {/* Modals */}

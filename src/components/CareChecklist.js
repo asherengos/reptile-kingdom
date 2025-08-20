@@ -5,6 +5,7 @@ import achievementService from '../services/achievementService';
 function CareChecklist({ species, onClose, isEmbedded = false }) {
   const [checklist, setChecklist] = useState(null);
   const [costBreakdown, setCostBreakdown] = useState(null);
+  const [isMissing, setIsMissing] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showOptional, setShowOptional] = useState(true);
   const [showExportOptions, setShowExportOptions] = useState(false);
@@ -13,10 +14,16 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
   useEffect(() => {
     if (species) {
       const speciesChecklist = getSpeciesChecklist(species.name);
+      if (!speciesChecklist) {
+        setIsMissing(true);
+        setChecklist({ essential: [], optional: [], aiRecommendations: [] });
+        setCostBreakdown({ essential: 0, range: '—', monthly: null, breakdown: {} });
+        return;
+      }
+      setIsMissing(false);
       const costInfo = getTotalEstimatedCost(species.name);
       setChecklist(speciesChecklist);
       setCostBreakdown(costInfo);
-      
       // Initialize checked items
       const initialChecked = new Set();
       speciesChecklist.essential.forEach(item => {
@@ -293,6 +300,30 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
       <div className="text-center py-12">
         <div className="animate-spin text-4xl mb-4">🔄</div>
         <p>Loading checklist...</p>
+      </div>
+    );
+  }
+
+  if (isMissing) {
+    const content = (
+      <div className="p-6 text-center">
+        <div className="text-5xl mb-4">📝</div>
+        <h3 className="text-xl font-bold text-gray-800 mb-2">Care checklist coming soon</h3>
+        <p className="text-gray-600">We’re still preparing a detailed shopping list for {species.name}. Check back shortly or explore other species.</p>
+      </div>
+    );
+    if (isEmbedded) {
+      return content;
+    }
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-3xl shadow-2xl max-w-xl w-full overflow-hidden">
+          <div className="bg-gradient-to-r from-reptile-green to-jungle-dark text-white p-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold">🛒 Care Checklist</h2>
+            <button onClick={onClose} className="text-white text-2xl font-bold p-2 hover:bg-white hover:bg-opacity-20 rounded-full">×</button>
+          </div>
+          {content}
+        </div>
       </div>
     );
   }
