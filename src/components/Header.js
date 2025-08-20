@@ -73,7 +73,7 @@ function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
                 aria-label="Open Knowledge Log"
                 title="Open Knowledge Log (saved tips & Q&A)"
               >
-                📚 Knowledge
+                📚 Saved Tips
               </button>
               <button
                 onClick={onOpenAchievements}
@@ -82,7 +82,7 @@ function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
                 aria-label="Open achievements"
                 title="Open achievements"
               >
-                🏆
+                🏆 Badges
               </button>
             </div>
           </div>
@@ -134,7 +134,7 @@ function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
                 aria-label="Open knowledge log to track your learning progress"
                 title="Open knowledge log"
               >
-                📚 Knowledge Log
+                📚 Saved Tips
               </button>
               
               <button
