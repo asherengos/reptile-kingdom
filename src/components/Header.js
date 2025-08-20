@@ -70,10 +70,10 @@ function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
                 onClick={onOpenKnowledgeLog}
                 onKeyDown={(e) => handleKeyDown(e, onOpenKnowledgeLog)}
                 className="text-sm secondary-cta px-3 md:px-4 py-2"
-                aria-label="Open knowledge log"
-                title="Open knowledge log"
+                aria-label="Open Knowledge Log"
+                title="Open Knowledge Log (saved tips & Q&A)"
               >
-                📚 Log
+                📚 Knowledge
               </button>
               <button
                 onClick={onOpenAchievements}
