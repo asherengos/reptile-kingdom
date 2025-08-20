@@ -124,6 +124,19 @@ src/
 4. **Ball Python** - Gentle giant snake
 5. **Corn Snake** - Colorful escape artist
 
+## 🎯 Quests
+
+### Quest 10: The Great Playtest
+**Testing & Analytics Dashboard** - Real-time metrics collection, user satisfaction monitoring, and completion rate analytics with export capabilities.
+
+### Quest 11: The Rite of Eternal Growth  
+**Automated Evolution System** - AI-powered insight engine, living roadmap, and sustainability spells for continuous platform improvement.
+
+### Quest 12: The Image Enchantment
+**Visual Transformation** - 19 species with professional stock photos, enhanced UI/UX, and responsive design optimized for tablets.
+
+**Live demo: [https://reptilerocks.netlify.app/](https://reptilerocks.netlify.app/)**
+
 ## 🔮 Future Enhancements
 
 - **Enhanced AI Models**: Support for more Ollama models
