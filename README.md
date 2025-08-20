@@ -221,3 +221,14 @@ This project is designed for educational and commercial use at Petco locations.
 *Powered by local AI intelligence for safe, accurate reptile care advice* 🤖✨
  
 Deployed demo: https://reptilerocks.netlify.app/ 
+
+## 🤖 AI Integration (Hackathon-compliant)
+
+AI Integration
+- Primary (required by hackathon): GPT-OSS local model (tested with Ollama / gpt-oss:20b)
+  Setup:
+    1. Install Ollama: https://ollama.ai
+    2. Pull model: ollama pull gpt-oss:20b
+    3. Start server: ollama serve
+    4. Frontend config: set REACT_APP_AI_PROVIDER=ollama (or follow src/config.example)
+- Optional fallback: OpenAI API (disabled by default). See src/config.example for API key usage. 

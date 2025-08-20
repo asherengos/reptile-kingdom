@@ -1,0 +1,12 @@
+# Rename this file to .env and adjust values as needed
+
+# AI provider selection: 'ollama' (default, GPT-OSS) or 'openai'
+REACT_APP_AI_PROVIDER=ollama
+
+# Ollama (GPT-OSS) settings
+REACT_APP_OLLAMA_BASE=http://localhost:11434
+REACT_APP_OLLAMA_MODEL=gpt-oss:20b
+
+# OpenAI (optional fallback) settings
+# REACT_APP_OPENAI_API_KEY=sk-...
+REACT_APP_OPENAI_MODEL=gpt-4o-mini

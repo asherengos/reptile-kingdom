@@ -1,12 +1,28 @@
 // AI Service for Reptile Info Tablet
-// This service handles communication with gpt-oss for intelligent reptile care advice
+// Primary provider: GPT-OSS via Ollama (required by hackathon)
+// Optional fallback: OpenAI API (disabled by default)
 
 class AIService {
   constructor() {
-    this.baseUrl = 'http://localhost:11434'; // Default Ollama endpoint
-    this.model = 'llama2'; // Default model, can be changed
+    // Provider selection via env var
+    // Values: 'ollama' (default, GPT-OSS) | 'openai' (optional fallback)
+    this.provider = (process.env.REACT_APP_AI_PROVIDER || 'ollama').toLowerCase();
+
+    // Ollama (GPT-OSS) config
+    this.baseUrl = process.env.REACT_APP_OLLAMA_BASE || 'http://localhost:11434';
+    this.model = process.env.REACT_APP_OLLAMA_MODEL || 'gpt-oss:20b';
+
+    // OpenAI config (optional)
+    this.openaiApiKey = process.env.REACT_APP_OPENAI_API_KEY || '';
+    this.openaiModel = process.env.REACT_APP_OPENAI_MODEL || 'gpt-4o-mini';
+
     this.isConnected = false;
-    this.testConnection();
+    // Only probe Ollama when provider is ollama
+    if (this.provider === 'ollama') {
+      this.testConnection();
+    } else {
+      this.isConnected = !!this.openaiApiKey;
+    }
   }
 
   // Test connection to Ollama
@@ -28,36 +44,54 @@ class AIService {
 
   // Generate AI response for reptile care questions
   async generateResponse(question, speciesData = null) {
-    if (!this.isConnected) {
-      return this.getFallbackResponse(question, speciesData);
-    }
+    const prompt = this.buildPrompt(question, speciesData);
 
     try {
-      const prompt = this.buildPrompt(question, speciesData);
-      
-      const response = await fetch(`${this.baseUrl}/api/generate`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: this.model,
-          prompt: prompt,
-          stream: false,
-          options: {
-            temperature: 0.7,
-            top_p: 0.9,
-            max_tokens: 300
-          }
-        })
-      });
+      if (this.provider === 'ollama') {
+        if (!this.isConnected) return this.getFallbackResponse(question, speciesData);
 
-      if (response.ok) {
+        const response = await fetch(`${this.baseUrl}/api/generate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: this.model,
+            prompt,
+            stream: false,
+            options: { temperature: 0.7, top_p: 0.9, max_tokens: 300 }
+          })
+        });
+        if (!response.ok) throw new Error(`Ollama error: ${response.status}`);
         const data = await response.json();
         return this.formatAIResponse(data.response);
-      } else {
-        throw new Error(`AI service error: ${response.status}`);
       }
+
+      if (this.provider === 'openai') {
+        if (!this.openaiApiKey) return this.getFallbackResponse(question, speciesData);
+
+        const resp = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.openaiApiKey}`
+          },
+          body: JSON.stringify({
+            model: this.openaiModel,
+            messages: [
+              { role: 'system', content: 'You are a helpful reptile expert that follows strict safety rules.' },
+              { role: 'user', content: prompt }
+            ],
+            temperature: 0.7,
+            max_tokens: 300
+          })
+        });
+        if (!resp.ok) throw new Error(`OpenAI error: ${resp.status}`);
+        const json = await resp.json();
+        const content = json.choices?.[0]?.message?.content || '';
+        return this.formatAIResponse(content);
+      }
+
+      // Unknown provider → fallback
+      return this.getFallbackResponse(question, speciesData);
     } catch (error) {
       console.error('AI service error:', error);
       return this.getFallbackResponse(question, speciesData);
@@ -149,7 +183,7 @@ Please provide a helpful, accurate response in 2-3 sentences. Include one fun fa
     };
   }
 
-  // Change AI model
+  // Change AI model (Ollama only)
   async changeModel(modelName) {
     try {
       const response = await fetch(`${this.baseUrl}/api/tags`);
@@ -174,7 +208,8 @@ Please provide a helpful, accurate response in 2-3 sentences. Include one fun fa
     return {
       connected: this.isConnected,
       model: this.model,
-      endpoint: this.baseUrl
+      endpoint: this.baseUrl,
+      provider: this.provider
     };
   }
 }
