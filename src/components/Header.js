@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import knowledgeService from '../services/knowledgeService';
 
 function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [savedCount, setSavedCount] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -10,6 +12,18 @@ function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Load saved tips count and listen for updates
+  useEffect(() => {
+    const loadCount = () => {
+      const log = knowledgeService.getKnowledgeLog();
+      setSavedCount(Array.isArray(log) ? log.length : 0);
+    };
+    loadCount();
+    const onUpdated = () => loadCount();
+    window.addEventListener('knowledgeUpdated', onUpdated);
+    return () => window.removeEventListener('knowledgeUpdated', onUpdated);
   }, []);
 
   const handleKeyDown = (event, action) => {
@@ -74,6 +88,9 @@ function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
                 title="Open Knowledge Log (saved tips & Q&A)"
               >
                 📚 Saved Tips
+                {savedCount > 0 && (
+                  <span className="ml-2 inline-flex items-center justify-center text-xs font-semibold bg-white/80 text-green-700 rounded-full px-2 py-0.5" aria-label={`${savedCount} saved tips`}>{savedCount}</span>
+                )}
               </button>
               <button
                 onClick={onOpenAchievements}
