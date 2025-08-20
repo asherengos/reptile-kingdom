@@ -4,6 +4,7 @@ import knowledgeService from '../services/knowledgeService';
 function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [savedCount, setSavedCount] = useState(0);
+  const [showFirstHelp, setShowFirstHelp] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +26,28 @@ function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
     window.addEventListener('knowledgeUpdated', onUpdated);
     return () => window.removeEventListener('knowledgeUpdated', onUpdated);
   }, []);
+
+  // First-load help tooltip logic
+  useEffect(() => {
+    try {
+      const seen = localStorage.getItem('helpSeen');
+      if (!seen) {
+        setShowFirstHelp(true);
+        const timer = setTimeout(() => {
+          setShowFirstHelp(false);
+          localStorage.setItem('helpSeen', 'true');
+        }, 7000);
+        return () => clearTimeout(timer);
+      }
+    } catch (e) {
+      // Ignore storage errors and avoid blocking UI
+    }
+  }, []);
+
+  const dismissHelp = () => {
+    setShowFirstHelp(false);
+    try { localStorage.setItem('helpSeen', 'true'); } catch {}
+  };
 
   const handleKeyDown = (event, action) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -80,18 +103,28 @@ function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
             </div>
             
             <div className="flex items-center space-x-2 md:space-x-3">
-              <button
-                onClick={onOpenKnowledgeLog}
-                onKeyDown={(e) => handleKeyDown(e, onOpenKnowledgeLog)}
-                className="text-sm secondary-cta px-3 md:px-4 py-2"
-                aria-label="Open Knowledge Log"
-                title="Open Knowledge Log (saved tips & Q&A)"
-              >
-                📚 Saved Tips
-                {savedCount > 0 && (
-                  <span className="ml-2 inline-flex items-center justify-center text-xs font-semibold bg-white/80 text-green-700 rounded-full px-2 py-0.5" aria-label={`${savedCount} saved tips`}>{savedCount}</span>
+              <div className="relative">
+                <button
+                  onClick={onOpenKnowledgeLog}
+                  onKeyDown={(e) => handleKeyDown(e, onOpenKnowledgeLog)}
+                  className="text-sm secondary-cta px-3 md:px-4 py-2"
+                  aria-label="Open Knowledge Log"
+                  title="Open Knowledge Log (saved tips & Q&A)"
+                >
+                  📚 Saved Tips
+                  {savedCount > 0 && (
+                    <span className="ml-2 inline-flex items-center justify-center text-xs font-semibold bg-white/80 text-green-700 rounded-full px-2 py-0.5" aria-label={`${savedCount} saved tips`}>{savedCount}</span>
+                  )}
+                </button>
+                {showFirstHelp && (
+                  <div className="absolute -top-16 left-1/2 -translate-x-1/2 z-50" onClick={dismissHelp} role="dialog" aria-label="Saved Tips help">
+                    <div className="relative bg-gray-900 text-white text-xs px-3 py-2 rounded-lg shadow-lg max-w-[200px]">
+                      Save care advice and Q&A here to revisit later.
+                      <div className="absolute left-1/2 -bottom-1 -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45"></div>
+                    </div>
+                  </div>
                 )}
-              </button>
+              </div>
               <button
                 onClick={onOpenAchievements}
                 onKeyDown={(e) => handleKeyDown(e, onOpenAchievements)}
@@ -101,6 +134,16 @@ function Header({ onOpenKnowledgeLog, onOpenAchievements }) {
               >
                 🏆 Badges
               </button>
+              {showFirstHelp && (
+                <div className="relative">
+                  <div className="absolute -top-16 left-1/2 -translate-x-1/2 z-50" onClick={dismissHelp} role="dialog" aria-label="Badges help">
+                    <div className="relative bg-gray-900 text-white text-xs px-3 py-2 rounded-lg shadow-lg max-w-[200px]">
+                      Earn fun badges as you explore reptile care topics.
+                      <div className="absolute left-1/2 -bottom-1 -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45"></div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
