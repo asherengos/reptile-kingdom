@@ -1,6 +1,8 @@
 // Care Checklist Data for Reptile Info Tablet
 // Provides comprehensive shopping lists and care requirements for each species
 
+import { reptileData } from './reptileData';
+
 export const careChecklistData = {
   'Leopard Gecko': {
     essential: [
@@ -622,9 +624,80 @@ export const careChecklistData = {
   }
 };
 
+// Helper: find species info
+const getSpeciesInfo = (name) => reptileData.find(s => s.name === name);
+
+// Generate a reasonable default checklist when specific data is missing
+const generateChecklist = (speciesName) => {
+  const info = getSpeciesInfo(speciesName);
+  if (!info) return null;
+
+  const slug = speciesName.toLowerCase().replace(/\s+/g, '_');
+  const type = (info.type || '').toLowerCase();
+
+  // Base items applicable to most
+  const base = [
+    { id: `${slug}_habitat`, category: 'Habitat', item: 'Appropriate enclosure', description: 'Sized for adult', priority: 'critical', estimatedCost: '$60-150', notes: '' },
+    { id: `${slug}_thermo`, category: 'Habitat', item: 'Thermometer & hygrometer', description: 'Monitor temp and humidity', priority: 'critical', estimatedCost: '$15-30', notes: 'Digital recommended' },
+    { id: `${slug}_hide_warm`, category: 'Hiding Spots', item: 'Warm hide', description: 'Snug hide on warm side', priority: 'critical', estimatedCost: '$10-25', notes: '' },
+    { id: `${slug}_hide_cool`, category: 'Hiding Spots', item: 'Cool hide', description: 'Snug hide on cool side', priority: 'critical', estimatedCost: '$10-25', notes: '' }
+  ];
+
+  let essentials = [];
+  let optional = [];
+
+  if (type === 'amphibian') {
+    essentials = [
+      base[0], base[1],
+      { id: `${slug}_substrate`, category: 'Substrate', item: 'Coconut fiber or sphagnum moss', description: 'Maintains humidity', priority: 'critical', estimatedCost: '$10-20', notes: '' },
+      { id: `${slug}_hide`, category: 'Hiding Spots', item: 'Hide', description: 'For security and comfort', priority: 'important', estimatedCost: '$10-20', notes: '' },
+      { id: `${slug}_water_dish`, category: 'Water', item: 'Shallow water dish', description: 'Soaking/drinking', priority: 'important', estimatedCost: '$5-15', notes: 'Easy exit' },
+      { id: `${slug}_food`, category: 'Food', item: 'Live insects', description: 'Primary food source', priority: 'critical', estimatedCost: '$8-20/week', notes: '' }
+    ];
+  } else if (type === 'turtle') {
+    essentials = [
+      { id: `${slug}_tank`, category: 'Habitat', item: 'Aquatic tank (75+ gal adult)', description: 'Swimming space', priority: 'critical', estimatedCost: '$120-250', notes: '' },
+      { id: `${slug}_filter`, category: 'Habitat', item: 'Canister filter', description: 'Keeps water clean', priority: 'critical', estimatedCost: '$60-150', notes: 'Strong filtration' },
+      { id: `${slug}_dock`, category: 'Habitat', item: 'Basking dock/platform', description: 'Dry area for basking', priority: 'critical', estimatedCost: '$20-40', notes: '' },
+      { id: `${slug}_uvb`, category: 'Lighting', item: 'UVB lighting', description: 'Shell health', priority: 'critical', estimatedCost: '$30-60', notes: 'Replace 6–12 mo' },
+      { id: `${slug}_heat`, category: 'Heating', item: 'Heat lamp', description: 'Basking temperature', priority: 'important', estimatedCost: '$20-40', notes: '' },
+      { id: `${slug}_food`, category: 'Food', item: 'Pellets & greens', description: 'Staple diet', priority: 'critical', estimatedCost: '$10-25/week', notes: '' }
+    ];
+  } else if (type === 'snake') {
+    essentials = [
+      base[0],
+      { id: `${slug}_uth`, category: 'Heating', item: 'Under-tank heater', description: 'Belly heat', priority: 'critical', estimatedCost: '$25-45', notes: '' },
+      { id: `${slug}_thermostat`, category: 'Heating', item: 'Thermostat', description: 'Controls heater safely', priority: 'critical', estimatedCost: '$30-60', notes: '' },
+      base[1], base[2], base[3],
+      { id: `${slug}_substrate`, category: 'Substrate', item: 'Aspen or cypress mulch', description: 'Safe substrate', priority: 'critical', estimatedCost: '$15-30', notes: '' },
+      { id: `${slug}_water_dish`, category: 'Water', item: 'Water dish', description: 'For drinking/soaking', priority: 'important', estimatedCost: '$10-20', notes: '' },
+      { id: `${slug}_food`, category: 'Food', item: 'Frozen/thawed rodents', description: 'Primary food', priority: 'critical', estimatedCost: '$5-15/week', notes: '' }
+    ];
+  } else { // lizards and others
+    essentials = [
+      base[0],
+      { id: `${slug}_uvb`, category: 'Lighting', item: 'UVB lighting', description: 'Vitamin D synthesis', priority: 'critical', estimatedCost: '$30-60', notes: '' },
+      { id: `${slug}_bask`, category: 'Heating', item: 'Heat lamp/basking bulb', description: 'Basking temperature', priority: 'critical', estimatedCost: '$20-40', notes: '' },
+      base[1], base[2], base[3],
+      { id: `${slug}_substrate`, category: 'Substrate', item: 'Reptile carpet or tile', description: 'Safe/easy clean', priority: 'critical', estimatedCost: '$15-30', notes: '' },
+      { id: `${slug}_water_dish`, category: 'Water', item: 'Water dish', description: 'For drinking', priority: 'important', estimatedCost: '$5-15', notes: '' },
+      { id: `${slug}_food`, category: 'Food', item: 'Insects or greens', description: 'Diet varies by species', priority: 'critical', estimatedCost: '$8-20/week', notes: '' }
+    ];
+  }
+
+  return {
+    essential: essentials,
+    optional: optional,
+    aiRecommendations: [
+      'Monitor temperatures and humidity regularly',
+      'Quarantine new animals and practice good hygiene'
+    ]
+  };
+};
+
 // Get checklist for a specific species
 export const getSpeciesChecklist = (speciesName) => {
-  return careChecklistData[speciesName] || null;
+  return careChecklistData[speciesName] || generateChecklist(speciesName);
 };
 
 // Get all available species for checklists
