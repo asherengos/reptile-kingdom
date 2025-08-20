@@ -3,10 +3,12 @@ import Header from './components/Header';
 import ReptileGrid from './components/ReptileGrid';
 import SpeciesDetailModal from './components/SpeciesDetailModal';
 import KnowledgeLog from './components/KnowledgeLog';
-import AchievementsDisplay from './components/AchievementsDisplay';
+// Achievements temporarily disabled
+// import AchievementsDisplay from './components/AchievementsDisplay';
 import UserFeedbackModal from './components/UserFeedbackModal';
 import TestingDashboard from './components/TestingDashboard';
 import EternalGrowthDashboard from './components/EternalGrowthDashboard';
+import AdopterQuiz from './components/AdopterQuiz';
 import insightEngine from './services/insightEngine';
 import livingRoadmap from './services/livingRoadmap';
 import sustainabilitySpells from './services/sustainabilitySpells';
@@ -14,10 +16,11 @@ import sustainabilitySpells from './services/sustainabilitySpells';
 function App() {
   const [selectedSpecies, setSelectedSpecies] = useState(null);
   const [showKnowledgeLog, setShowKnowledgeLog] = useState(false);
-  const [showAchievements, setShowAchievements] = useState(false);
+  // const [showAchievements, setShowAchievements] = useState(false);
   const [showUserFeedback, setShowUserFeedback] = useState(false);
   const [showTestingDashboard, setShowTestingDashboard] = useState(false);
   const [showEternalGrowth, setShowEternalGrowth] = useState(false);
+  const [showAdopterQuiz, setShowAdopterQuiz] = useState(false);
 
   // Initialize Quest 11 systems on app load
   useEffect(() => {
@@ -46,11 +49,17 @@ function App() {
       </div>
       <Header 
         onOpenKnowledgeLog={() => setShowKnowledgeLog(true)}
-        onOpenAchievements={() => setShowAchievements(true)}
+        onOpenAchievements={() => {}}
       />
       
       <main className="py-8">
         <ReptileGrid onSpeciesSelect={handleSpeciesSelect} />
+        {/* CTA for adopter quiz */}
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mt-4">
+          <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-4 border border-white/30 text-center">
+            <button onClick={()=>setShowAdopterQuiz(true)} className="px-6 py-3 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700">Find your best match</button>
+          </div>
+        </div>
         {/* Admin controls hidden by default. Enable for internal builds only. */}
         {process.env.REACT_APP_SHOW_ADMIN === 'true' && (
           <div className="max-w-7xl mx-auto px-4 md:px-6 mb-8">
@@ -98,12 +107,7 @@ function App() {
         />
       )}
 
-      {showAchievements && (
-        <AchievementsDisplay 
-          isOpen={showAchievements}
-          onClose={() => setShowAchievements(false)}
-        />
-      )}
+      {/* Achievements modal disabled */}
 
       {showUserFeedback && (
         <UserFeedbackModal 
@@ -125,6 +129,10 @@ function App() {
           isOpen={showEternalGrowth}
           onClose={() => setShowEternalGrowth(false)}
         />
+      )}
+
+      {showAdopterQuiz && (
+        <AdopterQuiz isOpen={showAdopterQuiz} onClose={()=>setShowAdopterQuiz(false)} />
       )}
     </div>
   );
