@@ -24,10 +24,16 @@ if (typeof URL !== 'undefined') {
   }
 }
 
-// Stub achievement side effects in stories
-if (achievementService && typeof achievementService.updateProgress === 'function') {
+// Decorator to stub achievement side effects per-story and restore after
+const withAchievementStub = (Story) => {
+  const original = achievementService.updateProgress;
   achievementService.updateProgress = () => ({ progress: {}, newAchievements: [] });
-}
+  try {
+    return <Story />;
+  } finally {
+    achievementService.updateProgress = original;
+  }
+};
 
 const leopardGecko = { name: 'Leopard Gecko', emoji: '🦎' };
 const ballPython = { name: 'Ball Python', emoji: '🐍' };
@@ -50,6 +56,7 @@ export default {
   parameters: {
     layout: 'padded'
   },
+  decorators: [withAchievementStub],
   argTypes: {
     initialCategory: {
       control: { type: 'select' },

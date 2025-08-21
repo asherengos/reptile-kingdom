@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSpeciesChecklist, getTotalEstimatedCost } from '../data/careChecklistData';
+import { generateChecklistCSV } from '../utils/csv';
 import achievementService from '../services/achievementService';
 
 function CareChecklist({ species, onClose, isEmbedded = false, initialCategory = 'all', initialShowOptional = true }) {
@@ -85,6 +86,22 @@ function CareChecklist({ species, onClose, isEmbedded = false, initialCategory =
     }
   };
 
+  const handleReset = () => {
+    try {
+      if (species) {
+        const storageKey = `careChecklist:${species.name}`;
+        localStorage.removeItem(storageKey);
+      }
+    } catch (e) {
+      // no-op
+    }
+    if (checklist) {
+      const reset = new Set();
+      checklist.essential.forEach(i => reset.add(i.id));
+      setCheckedItems(reset);
+    }
+  };
+
   const getFilteredItems = () => {
     if (!checklist) return { essential: [], optional: [] };
 
@@ -163,7 +180,7 @@ function CareChecklist({ species, onClose, isEmbedded = false, initialCategory =
       filename = `${species.name}-care-checklist.json`;
       mimeType = 'application/json';
     } else if (format === 'csv') {
-      content = generateCSVExport();
+      content = generateChecklistCSV(checklist, checkedItems);
       filename = `${species.name}-care-checklist.csv`;
       mimeType = 'text/csv';
     }
@@ -345,22 +362,7 @@ function CareChecklist({ species, onClose, isEmbedded = false, initialCategory =
     printWindow.document.close();
   };
 
-  const generateCSVExport = () => {
-    const rows = [];
-    const escape = (val) => {
-      if (val == null) return '';
-      const s = String(val).replace(/"/g, '""');
-      return `"${s}"`;
-    };
-    rows.push(['Section', 'ID', 'Item', 'Category', 'Priority', 'Estimated Cost', 'Description', 'Notes'].map(escape).join(','));
-    checklist.essential.forEach((item) => {
-      rows.push(['Essential', item.id, item.item, item.category, item.priority, item.estimatedCost, item.description, item.notes || ''].map(escape).join(','));
-    });
-    checklist.optional.forEach((item) => {
-      rows.push(['Optional', item.id, item.item, item.category, item.priority, item.estimatedCost, item.description, item.notes || ''].map(escape).join(','));
-    });
-    return rows.join('\n');
-  };
+  // CSV generation moved to utils/csv.js
 
   const filteredItems = getFilteredItems();
   const categories = getCategories();
@@ -471,6 +473,14 @@ function CareChecklist({ species, onClose, isEmbedded = false, initialCategory =
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
             >
               📤 Export
+            </button>
+
+            {/* Reset Button */}
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors duration-200"
+            >
+              ♻️ Reset
             </button>
           </div>
 
@@ -743,6 +753,14 @@ function CareChecklist({ species, onClose, isEmbedded = false, initialCategory =
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
               >
                 📤 Export
+              </button>
+
+              {/* Reset Button */}
+              <button
+                onClick={handleReset}
+                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors duration-200"
+              >
+                ♻️ Reset
               </button>
             </div>
 

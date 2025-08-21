@@ -723,12 +723,41 @@ const generateChecklist = (speciesName) => {
 
 // Get checklist for a specific species
 export const getSpeciesChecklist = (speciesName) => {
-  return careChecklistData[speciesName] || generateChecklist(speciesName);
+  // Check main care checklist data first
+  if (careChecklistData[speciesName]) {
+    return careChecklistData[speciesName];
+  }
+  
+  // Check additional species checklists
+  const additionalChecklist = getAdditionalSpeciesChecklist(speciesName);
+  if (additionalChecklist) {
+    return additionalChecklist;
+  }
+  
+  // Fallback to generated checklist
+  return generateChecklist(speciesName);
 };
 
 // Get all available species for checklists
 export const getChecklistSpecies = () => {
-  return Object.keys(careChecklistData);
+  const mainSpecies = Object.keys(careChecklistData);
+  const additionalSpecies = [
+    'Crested Gecko',
+    'Axolotl', 
+    'Red-Eared Slider',
+    'Green Anole',
+    'Blue-Tongued Skink',
+    'Milk Snake',
+    'Fire-Bellied Toad',
+    'Uromastyx',
+    'Hognose Snake',
+    'Chameleon',
+    'Tiger Salamander',
+    'Gargoyle Gecko',
+    'Kingsnake'
+  ];
+  
+  return [...mainSpecies, ...additionalSpecies];
 };
 
 // Calculate total estimated cost for a species
@@ -835,4 +864,658 @@ export const getChecklistByCategory = (speciesName, category) => {
     essential: checklist.essential.filter(item => item.category === category),
     optional: checklist.optional.filter(item => item.category === category)
   };
+};
+
+// Additional species care checklists
+export const getAdditionalSpeciesChecklist = (speciesName) => {
+  const checklists = {
+    'Crested Gecko': {
+      essential: [
+        {
+          id: 'cg-e1',
+          item: '18x18x24 inch terrarium',
+          category: 'Habitat',
+          priority: 'critical',
+          estimatedCost: '$80-120',
+          description: 'Vertical terrarium for climbing',
+          notes: 'Glass or screen top; avoid fish tanks'
+        },
+        {
+          id: 'cg-e2',
+          item: 'Coconut fiber substrate',
+          category: 'Substrate',
+          priority: 'critical',
+          estimatedCost: '$15-25',
+          description: 'Retains moisture and safe for geckos',
+          notes: '2-3 inches deep; change every 3-4 months'
+        },
+        {
+          id: 'cg-e3',
+          item: 'Climbing branches and vines',
+          category: 'Enrichment',
+          priority: 'critical',
+          estimatedCost: '$20-40',
+          description: 'Natural or artificial branches for climbing',
+          notes: 'Secure firmly; provide multiple levels'
+        },
+        {
+          id: 'cg-e4',
+          item: 'Hiding spots',
+          category: 'Hiding Spots',
+          priority: 'critical',
+          estimatedCost: '$15-30',
+          description: 'Cork bark, bamboo tubes, or commercial hides',
+          notes: 'At least 2-3 hides at different heights'
+        },
+        {
+          id: 'cg-e5',
+          item: 'Crested gecko diet (CGD)',
+          category: 'Food',
+          priority: 'critical',
+          estimatedCost: '$20-35',
+          description: 'Complete powdered diet for crested geckos',
+          notes: 'Repashy or Pangea brands recommended'
+        },
+        {
+          id: 'cg-e6',
+          item: 'Small insects',
+          category: 'Food',
+          priority: 'important',
+          estimatedCost: '$15-25',
+          description: 'Crickets, roaches, or mealworms',
+          notes: 'Dust with calcium powder'
+        },
+        {
+          id: 'cg-e7',
+          item: 'Calcium powder with D3',
+          category: 'Supplements',
+          priority: 'important',
+          estimatedCost: '$10-15',
+          description: 'Essential for bone health',
+          notes: 'Dust insects 2-3 times per week'
+        },
+        {
+          id: 'cg-e8',
+          item: 'Misting bottle',
+          category: 'Water',
+          priority: 'critical',
+          estimatedCost: '$5-10',
+          description: 'For daily enclosure misting',
+          notes: 'Mist 1-2 times daily to maintain humidity'
+        },
+        {
+          id: 'cg-e9',
+          item: 'Digital thermometer/hygrometer',
+          category: 'Monitoring',
+          priority: 'important',
+          estimatedCost: '$15-25',
+          description: 'Monitor temperature and humidity',
+          notes: 'Place at mid-level in enclosure'
+        }
+      ],
+      optional: [
+        {
+          id: 'cg-o1',
+          item: 'Live plants',
+          category: 'Enrichment',
+          priority: 'nice-to-have',
+          estimatedCost: '$25-50',
+          description: 'Pothos, bromeliads, or air plants',
+          notes: 'Improves humidity and natural appearance'
+        },
+        {
+          id: 'cg-o2',
+          item: 'LED lighting',
+          category: 'Lighting',
+          priority: 'nice-to-have',
+          estimatedCost: '$30-60',
+          description: 'Low-wattage LED for plant growth',
+          notes: 'Avoid bright lights; geckos prefer dim'
+        },
+        {
+          id: 'cg-o3',
+          item: 'Feeding ledge',
+          category: 'Enrichment',
+          priority: 'nice-to-have',
+          estimatedCost: '$15-25',
+          description: 'Platform for food and water',
+          notes: 'Place at mid-height; easy to clean'
+        },
+        {
+          id: 'cg-o4',
+          item: 'Bioactive setup supplies',
+          category: 'Substrate',
+          priority: 'nice-to-have',
+          estimatedCost: '$50-100',
+          description: 'Springtails, isopods, and drainage layer',
+          notes: 'Advanced setup; requires research'
+        }
+      ],
+      aiRecommendations: [
+        'Keep temperature between 72-78°F (22-26°C)',
+        'Maintain humidity at 50-70%',
+        'Feed CGD 3-4 times per week',
+        'Handle minimally to reduce stress',
+        'Provide vertical climbing space',
+        'Avoid direct basking lights'
+      ]
+    },
+    'Axolotl': {
+      essential: [
+        {
+          id: 'ax-e1',
+          item: '20+ gallon long aquarium',
+          category: 'Habitat',
+          priority: 'critical',
+          estimatedCost: '$100-150',
+          description: 'Long tank for swimming space',
+          notes: 'Must be long, not tall; axolotls are bottom-dwellers'
+        },
+        {
+          id: 'ax-e2',
+          item: 'Aquarium filter',
+          category: 'Water',
+          priority: 'critical',
+          estimatedCost: '$40-80',
+          description: 'Gentle filtration system',
+          notes: 'Avoid strong currents; axolotls prefer still water'
+        },
+        {
+          id: 'ax-e3',
+          item: 'Aquarium chiller',
+          category: 'Heating',
+          priority: 'critical',
+          estimatedCost: '$200-400',
+          description: 'Keep water cool (60-68°F)',
+          notes: 'Essential for axolotl health; they overheat easily'
+        },
+        {
+          id: 'ax-e4',
+          item: 'Fine sand substrate',
+          category: 'Substrate',
+          priority: 'important',
+          estimatedCost: '$15-25',
+          description: 'Very fine sand for digging',
+          notes: 'No gravel - risk of impaction'
+        },
+        {
+          id: 'ax-e5',
+          item: 'Hiding spots',
+          category: 'Hiding Spots',
+          priority: 'critical',
+          estimatedCost: '$20-40',
+          description: 'Caves, PVC pipes, or ceramic hides',
+          notes: 'Axolotls need dark places to hide'
+        },
+        {
+          id: 'ax-e6',
+          item: 'High-quality pellets',
+          category: 'Food',
+          priority: 'critical',
+          estimatedCost: '$25-40',
+          description: 'Sinking carnivore pellets',
+          notes: 'Hikari or Rangen brands recommended'
+        },
+        {
+          id: 'ax-e7',
+          item: 'Earthworms',
+          category: 'Food',
+          priority: 'important',
+          estimatedCost: '$15-25',
+          description: 'Live or frozen earthworms',
+          notes: 'Excellent protein source; cut to size'
+        },
+        {
+          id: 'ax-e8',
+          item: 'Water conditioner',
+          category: 'Water',
+          priority: 'critical',
+          estimatedCost: '$10-20',
+          description: 'Remove chlorine and chloramines',
+          notes: 'Use every water change'
+        },
+        {
+          id: 'ax-e9',
+          item: 'Digital thermometer',
+          category: 'Monitoring',
+          priority: 'critical',
+          estimatedCost: '$15-25',
+          description: 'Monitor water temperature',
+          notes: 'Keep below 70°F at all times'
+        }
+      ],
+      optional: [
+        {
+          id: 'ax-o1',
+          item: 'Live plants',
+          category: 'Enrichment',
+          priority: 'nice-to-have',
+          estimatedCost: '$30-60',
+          description: 'Java moss, anubias, or hornwort',
+          notes: 'Improves water quality and appearance'
+        },
+        {
+          id: 'ax-o2',
+          item: 'Air stone',
+          category: 'Water',
+          priority: 'nice-to-have',
+          estimatedCost: '$10-20',
+          description: 'Gentle aeration',
+          notes: 'Helps with oxygen levels'
+        },
+        {
+          id: 'ax-o3',
+          item: 'Feeding tongs',
+          category: 'Food',
+          priority: 'nice-to-have',
+          estimatedCost: '$8-15',
+          description: 'Handy for feeding worms',
+          notes: 'Stainless steel; easy to clean'
+        },
+        {
+          id: 'ax-o4',
+          item: 'Tank divider',
+          category: 'Habitat',
+          priority: 'nice-to-have',
+          estimatedCost: '$15-25',
+          description: 'Separate multiple axolotls',
+          notes: 'If keeping more than one'
+        }
+      ],
+      aiRecommendations: [
+        'Keep water temperature between 60-68°F (16-20°C)',
+        'Perform 25% water changes weekly',
+        'Feed every 2-3 days',
+        'Avoid sharp decorations',
+        'Use gentle filtration',
+        'Monitor for signs of stress or illness'
+      ]
+    },
+    'Fire-Bellied Toad': {
+      essential: [
+        {
+          id: 'fbt-e1',
+          item: '10+ gallon terrarium',
+          category: 'Habitat',
+          priority: 'critical',
+          estimatedCost: '$40-80',
+          description: 'Horizontal tank with secure lid',
+          notes: 'Escape artists; need tight-fitting lid'
+        },
+        {
+          id: 'fbt-e2',
+          item: 'Coconut fiber substrate',
+          category: 'Substrate',
+          priority: 'critical',
+          estimatedCost: '$15-25',
+          description: 'Retains moisture well',
+          notes: 'Keep consistently moist but not soggy'
+        },
+        {
+          id: 'fbt-e3',
+          item: 'Water dish',
+          category: 'Water',
+          priority: 'critical',
+          estimatedCost: '$10-20',
+          description: 'Shallow, easy to access',
+          notes: 'Change water daily; keep clean'
+        },
+        {
+          id: 'fbt-e4',
+          item: 'Hiding spots',
+          category: 'Hiding Spots',
+          priority: 'critical',
+          estimatedCost: '$15-30',
+          description: 'Cork bark, plants, or commercial hides',
+          notes: 'Multiple hides for security'
+        },
+        {
+          id: 'fbt-e5',
+          item: 'Small insects',
+          category: 'Food',
+          priority: 'critical',
+          estimatedCost: '$15-25',
+          description: 'Crickets, fruit flies, small roaches',
+          notes: 'Size appropriate for toad mouth'
+        },
+        {
+          id: 'fbt-e6',
+          item: 'Calcium powder',
+          category: 'Supplements',
+          priority: 'important',
+          estimatedCost: '$10-15',
+          description: 'Dust insects for nutrition',
+          notes: 'Use 2-3 times per week'
+        },
+        {
+          id: 'fbt-e7',
+          item: 'Misting bottle',
+          category: 'Water',
+          priority: 'critical',
+          estimatedCost: '$5-10',
+          description: 'Maintain humidity',
+          notes: 'Mist 1-2 times daily'
+        },
+        {
+          id: 'fbt-e8',
+          item: 'Digital thermometer/hygrometer',
+          category: 'Monitoring',
+          priority: 'important',
+          estimatedCost: '$15-25',
+          description: 'Monitor temperature and humidity',
+          notes: 'Keep humidity 70-80%'
+        }
+      ],
+      optional: [
+        {
+          id: 'fbt-o1',
+          item: 'Live plants',
+          category: 'Enrichment',
+          priority: 'nice-to-have',
+          estimatedCost: '$25-50',
+          description: 'Pothos, ferns, or moss',
+          notes: 'Improves humidity and natural look'
+        },
+        {
+          id: 'fbt-o2',
+          item: 'UVB lighting',
+          category: 'Lighting',
+          priority: 'nice-to-have',
+          estimatedCost: '$40-80',
+          description: 'Low-level UVB for health',
+          notes: 'Not essential but beneficial'
+        },
+        {
+          id: 'fbt-o3',
+          item: 'Feeding dish',
+          category: 'Food',
+          priority: 'nice-to-have',
+          estimatedCost: '$8-15',
+          description: 'Contain insects during feeding',
+          notes: 'Easier feeding and less mess'
+        },
+        {
+          id: 'fbt-o4',
+          item: 'Background decoration',
+          category: 'Enrichment',
+          priority: 'nice-to-have',
+          estimatedCost: '$20-40',
+          description: 'Natural-looking background',
+          notes: 'Improves enclosure aesthetics'
+        }
+      ],
+      aiRecommendations: [
+        'Keep temperature between 70-80°F (21-27°C)',
+        'Maintain humidity at 70-80%',
+        'Feed every 2-3 days',
+        'Avoid handling with bare hands',
+        'Keep substrate consistently moist',
+        'Provide both land and water areas'
+      ]
+    },
+    'Tiger Salamander': {
+      essential: [
+        {
+          id: 'ts-e1',
+          item: '20+ gallon terrarium',
+          category: 'Habitat',
+          priority: 'critical',
+          estimatedCost: '$60-100',
+          description: 'Large terrestrial setup',
+          notes: 'Horizontal tank; salamanders need space'
+        },
+        {
+          id: 'ts-e2',
+          item: 'Coconut fiber substrate',
+          category: 'Substrate',
+          priority: 'critical',
+          estimatedCost: '$20-35',
+          description: 'Deep substrate for burrowing',
+          notes: '4-6 inches deep; keep moist'
+        },
+        {
+          id: 'ts-e3',
+          item: 'Hiding spots',
+          category: 'Hiding Spots',
+          priority: 'critical',
+          estimatedCost: '$20-40',
+          description: 'Multiple hides and burrowing areas',
+          notes: 'Salamanders are secretive'
+        },
+        {
+          id: 'ts-e4',
+          item: 'Water dish',
+          category: 'Water',
+          priority: 'critical',
+          estimatedCost: '$10-20',
+          description: 'Large, shallow water dish',
+          notes: 'Change water daily; keep clean'
+        },
+        {
+          id: 'ts-e5',
+          item: 'Insects and worms',
+          category: 'Food',
+          priority: 'critical',
+          estimatedCost: '$20-35',
+          description: 'Crickets, earthworms, mealworms',
+          notes: 'Varied diet for nutrition'
+        },
+        {
+          id: 'ts-e6',
+          item: 'Calcium powder',
+          category: 'Supplements',
+          priority: 'important',
+          estimatedCost: '$10-15',
+          description: 'Dust insects for health',
+          notes: 'Use 2-3 times per week'
+        },
+        {
+          id: 'ts-e7',
+          item: 'Misting bottle',
+          category: 'Water',
+          priority: 'critical',
+          estimatedCost: '$5-10',
+          description: 'Maintain substrate moisture',
+          notes: 'Mist daily to keep substrate damp'
+        },
+        {
+          id: 'ts-e8',
+          item: 'Digital thermometer/hygrometer',
+          category: 'Monitoring',
+          priority: 'important',
+          estimatedCost: '$15-25',
+          description: 'Monitor temperature and humidity',
+          notes: 'Keep cool (60-70°F) and humid (70-80%)'
+        }
+      ],
+      optional: [
+        {
+          id: 'ts-o1',
+          item: 'Live plants',
+          category: 'Enrichment',
+          priority: 'nice-to-have',
+          estimatedCost: '$30-60',
+          description: 'Ferns, moss, or small plants',
+          notes: 'Improves humidity and natural look'
+        },
+        {
+          id: 'ts-o2',
+          item: 'Cooling system',
+          category: 'Heating',
+          priority: 'nice-to-have',
+          estimatedCost: '$100-200',
+          description: 'Keep enclosure cool in summer',
+          notes: 'Salamanders prefer cool temperatures'
+        },
+        {
+          id: 'ts-o3',
+          item: 'Feeding tongs',
+          category: 'Food',
+          priority: 'nice-to-have',
+          estimatedCost: '$8-15',
+          description: 'Handy for feeding',
+          notes: 'Stainless steel; easy to clean'
+        },
+        {
+          id: 'ts-o4',
+          item: 'Background decoration',
+          category: 'Enrichment',
+          priority: 'nice-to-have',
+          estimatedCost: '$20-40',
+          description: 'Natural-looking background',
+          notes: 'Improves enclosure aesthetics'
+        }
+      ],
+      aiRecommendations: [
+        'Keep temperature between 60-70°F (16-21°C)',
+        'Maintain humidity at 70-80%',
+        'Feed every 2-3 days',
+        'Provide deep substrate for burrowing',
+        'Keep enclosure cool and humid',
+        'Handle minimally to reduce stress'
+      ]
+    },
+    'Red-Eared Slider': {
+      essential: [
+        {
+          id: 'res-e1',
+          item: '75+ gallon aquarium',
+          category: 'Habitat',
+          priority: 'critical',
+          estimatedCost: '$200-400',
+          description: 'Large aquatic setup for swimming',
+          notes: 'Must be long, not tall; turtles need swimming space'
+        },
+        {
+          id: 'res-e2',
+          item: 'Powerful filter system',
+          category: 'Water',
+          priority: 'critical',
+          estimatedCost: '$80-150',
+          description: 'Canister or power filter rated for tank size',
+          notes: 'Turtles are messy; need strong filtration'
+        },
+        {
+          id: 'res-e3',
+          item: 'Basking dock',
+          category: 'Habitat',
+          priority: 'critical',
+          estimatedCost: '$30-60',
+          description: 'Dry area for basking and UVB exposure',
+          notes: 'Must be completely dry and accessible'
+        },
+        {
+          id: 'res-e4',
+          item: 'UVB lighting',
+          category: 'Lighting',
+          priority: 'critical',
+          estimatedCost: '$40-80',
+          description: 'Essential for shell health and calcium absorption',
+          notes: 'Replace every 6-12 months'
+        },
+        {
+          id: 'res-e5',
+          item: 'Basking light',
+          category: 'Heating',
+          priority: 'critical',
+          estimatedCost: '$20-40',
+          description: 'Heat lamp for basking area',
+          notes: 'Keep basking area 85-90°F'
+        },
+        {
+          id: 'res-e6',
+          item: 'Water heater',
+          category: 'Heating',
+          priority: 'important',
+          estimatedCost: '$30-50',
+          description: 'Maintain water temperature 75-80°F',
+          notes: 'Use submersible heater with guard'
+        },
+        {
+          id: 'res-e7',
+          item: 'High-quality turtle pellets',
+          category: 'Food',
+          priority: 'critical',
+          estimatedCost: '$20-35',
+          description: 'Staple diet for turtles',
+          notes: 'Hikari or Zoo Med brands recommended'
+        },
+        {
+          id: 'res-e8',
+          item: 'Leafy greens',
+          category: 'Food',
+          priority: 'important',
+          estimatedCost: '$10-20',
+          description: 'Romaine, kale, dandelion greens',
+          notes: 'Offer daily; avoid iceberg lettuce'
+        },
+        {
+          id: 'res-e9',
+          item: 'Water conditioner',
+          category: 'Water',
+          priority: 'critical',
+          estimatedCost: '$10-20',
+          description: 'Remove chlorine and chloramines',
+          notes: 'Use with every water change'
+        },
+        {
+          id: 'res-e10',
+          item: 'Digital thermometer',
+          category: 'Monitoring',
+          priority: 'important',
+          estimatedCost: '$15-25',
+          description: 'Monitor both water and basking temperatures',
+          notes: 'Check temperatures daily'
+        }
+      ],
+      optional: [
+        {
+          id: 'res-o1',
+          item: 'Live plants',
+          category: 'Enrichment',
+          priority: 'nice-to-have',
+          estimatedCost: '$30-60',
+          description: 'Anacharis, hornwort, or anubias',
+          notes: 'Turtles may eat some plants'
+        },
+        {
+          id: 'res-o2',
+          item: 'Substrate',
+          category: 'Substrate',
+          priority: 'nice-to-have',
+          estimatedCost: '$20-40',
+          description: 'Large river stones or bare bottom',
+          notes: 'Avoid small gravel (impaction risk)'
+        },
+        {
+          id: 'res-o3',
+          item: 'Feeding station',
+          category: 'Food',
+          priority: 'nice-to-have',
+          estimatedCost: '$15-25',
+          description: 'Separate container for feeding',
+          notes: 'Reduces mess in main tank'
+        },
+        {
+          id: 'res-o4',
+          item: 'Tank decorations',
+          category: 'Enrichment',
+          priority: 'nice-to-have',
+          estimatedCost: '$25-50',
+          description: 'Rocks, driftwood, or artificial decor',
+          notes: 'Ensure no sharp edges'
+        }
+      ],
+      aiRecommendations: [
+        'Keep water temperature 75-80°F (24-27°C)',
+        'Maintain basking area 85-90°F (29-32°C)',
+        'Perform 25% water changes weekly',
+        'Feed pellets daily, greens daily',
+        'Provide UVB for 10-12 hours daily',
+        'Monitor water quality closely'
+      ]
+    }
+  };
+
+  return checklists[speciesName] || null;
 };
