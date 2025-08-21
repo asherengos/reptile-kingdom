@@ -667,3 +667,40 @@ export const reptileData = [
     ]
   }
 ];
+
+// Append additional common species with minimal starter profiles (auto-filled by generators elsewhere)
+import { additionalSpecies } from './additionalSpecies';
+
+additionalSpecies.forEach((s, idx) => {
+  reptileData.push({
+    id: reptileData.length + 1 + idx,
+    name: s.name,
+    type: s.type,
+    emoji: s.emoji,
+    habitat: {
+      temperature: 'Varies by setup',
+      humidity: 'Varies by setup',
+      enclosureSize: 'Appropriate adult size',
+      substrate: 'Species-appropriate'
+    },
+    diet: {
+      primary: 'Species-appropriate diet',
+      frequency: 'Varies by life stage',
+      supplements: 'As recommended',
+      water: 'Fresh water; details vary'
+    },
+    careTips: [
+      'Research species-specific requirements',
+      'Provide secure hides and enrichment',
+      'Monitor temperature and humidity'
+    ],
+    funFacts: [
+      'Popular in the pet trade',
+      'Captive-bred individuals recommended'
+    ],
+    warnings: [
+      'Ensure enclosure size and heating are adequate',
+      'Avoid wild-caught animals when possible'
+    ]
+  });
+});

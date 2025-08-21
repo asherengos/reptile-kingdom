@@ -1,0 +1,35 @@
+// Minimal list of additional common species sold in pet stores
+export const additionalSpecies = [
+  { name: 'Russian Tortoise', type: 'Tortoise', emoji: '🐢' },
+  { name: 'Sulcata Tortoise', type: 'Tortoise', emoji: '🐢' },
+  { name: "Hermann's Tortoise", type: 'Tortoise', emoji: '🐢' },
+  { name: 'Greek Tortoise', type: 'Tortoise', emoji: '🐢' },
+  { name: 'African Sideneck Turtle', type: 'Turtle', emoji: '🐢' },
+  { name: 'Map Turtle', type: 'Turtle', emoji: '🐢' },
+  { name: 'Musk Turtle', type: 'Turtle', emoji: '🐢' },
+  { name: 'Painted Turtle', type: 'Turtle', emoji: '🐢' },
+  { name: "White's Tree Frog", type: 'Amphibian', emoji: '🐸' },
+  { name: 'Green Tree Frog', type: 'Amphibian', emoji: '🐸' },
+  { name: 'Gray Tree Frog', type: 'Amphibian', emoji: '🐸' },
+  { name: 'Fire Skink', type: 'Lizard', emoji: '🦎' },
+  { name: 'Tokay Gecko', type: 'Lizard', emoji: '🦎' },
+  { name: 'African Fat-Tailed Gecko', type: 'Lizard', emoji: '🦎' },
+  { name: 'Madagascar Day Gecko', type: 'Lizard', emoji: '🦎' },
+  { name: 'Long-Tailed Lizard', type: 'Lizard', emoji: '🦎' },
+  { name: 'Red-Eyed Crocodile Skink', type: 'Lizard', emoji: '🦎' },
+  { name: 'Savannah Monitor', type: 'Lizard', emoji: '🦎' },
+  { name: 'Ackie Monitor', type: 'Lizard', emoji: '🦎' },
+  { name: 'Rosy Boa', type: 'Snake', emoji: '🐍' },
+  { name: 'Kenyan Sand Boa', type: 'Snake', emoji: '🐍' },
+  { name: 'California Kingsnake', type: 'Snake', emoji: '🐍' },
+  { name: 'Garter Snake', type: 'Snake', emoji: '🐍' },
+  { name: 'Boa Constrictor', type: 'Snake', emoji: '🐍' },
+  { name: 'Rainbow Boa', type: 'Snake', emoji: '🐍' },
+  { name: 'Carpet Python', type: 'Snake', emoji: '🐍' },
+  { name: 'Green Tree Python', type: 'Snake', emoji: '🐍' },
+  { name: 'Vietnamese Cave Gecko', type: 'Lizard', emoji: '🦎' },
+  { name: 'Knight Anole', type: 'Lizard', emoji: '🦎' },
+  { name: 'Cuban False Chameleon', type: 'Lizard', emoji: '🦎' }
+];
+
+
