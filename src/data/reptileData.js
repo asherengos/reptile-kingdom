@@ -1394,6 +1394,22 @@ additionalSpecies.forEach((s, idx) => {
         size: '6-12 inches shell length (15-30 cm)',
         lifespan: '20-40 years'
       },
+      tortoise: {
+        habitat: {
+          temperature: '75-85°F (24-29°C) with 90-95°F (32-35°C) basking',
+          humidity: '30-60% depending on species (higher for young)',
+          enclosureSize: 'Indoors: 4x2 ft tortoise table minimum; larger preferred',
+          substrate: 'Organic topsoil/sand mix or cypress mulch (deep for digging)'
+        },
+        diet: {
+          primary: 'High‑fiber grasses and weeds; dark leafy greens; occasional squash',
+          frequency: 'Offer fresh greens daily; graze as desired',
+          supplements: 'Calcium (no D3) 2-3x/week; provide cuttlebone free‑choice',
+          water: 'Shallow soaking dish; soak juveniles daily, adults 1-2x/week'
+        },
+        size: '6-30 inches depending on species',
+        lifespan: '30-80+ years'
+      },
       amphibian: {
         habitat: {
           temperature: '60-75°F (16-24°C)',
@@ -1414,16 +1430,16 @@ additionalSpecies.forEach((s, idx) => {
 
     const defaults = defaultsByType[typeLower] || {
       habitat: {
-        temperature: '72-82°F (22-28°C)',
-        humidity: '40-70%',
-        enclosureSize: 'Appropriate adult size with secure lid',
-        substrate: 'Species-appropriate, easy to clean'
+        temperature: '72-82°F (22-28°C) with a small warm basking area',
+        humidity: '40-70% with adequate ventilation',
+        enclosureSize: 'At least 36x18x18 in for small/medium reptiles; larger is better',
+        substrate: 'Easy‑clean base like paper/tile; add cypress mulch or soil where safe'
       },
       diet: {
-        primary: 'Balanced, species-appropriate diet',
-        frequency: 'Juveniles more often than adults',
-        supplements: 'Calcium/mineral support as appropriate',
-        water: 'Fresh, clean water available at all times'
+        primary: 'Appropriate mix of insects/greens or whole prey based on type',
+        frequency: 'Juveniles daily; adults every 1-3 days (snakes 7-14 days)',
+        supplements: 'Calcium 2-3x/week; multivitamin 1x/week for insectivores',
+        water: 'Fresh, clean water available at all times; mist if humidity is low'
       },
       size: 'Small-to-medium sized captive species',
       lifespan: '8-20 years with proper care'
