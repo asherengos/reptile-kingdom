@@ -214,7 +214,7 @@ export const quizData = {
         'To show they\'re happy'
       ],
       correctAnswer: 1,
-      explanation: 'Ball Pythons curl into a tight ball as a defensive mechanism to protect their head and vital organs.',
+      explanation: 'Ball Pythons curl into a tight ball as a defensive mechanism to protect their head and vital organs. Why this matters: recognizing stress helps you adjust handling and habitat.',
       funFact: '🔄 This defensive behavior is so characteristic that it gave them their common name!'
     },
     {
@@ -227,7 +227,7 @@ export const quizData = {
         'Vegetables'
       ],
       correctAnswer: 1,
-      explanation: 'Frozen/thawed prey is safer for both the snake and the prey, preventing injury to the snake.',
+      explanation: 'Frozen/thawed prey is safer for both the snake and the prey, preventing injury to the snake. Why this matters: live prey can injure snakes and increases stress.',
       funFact: '❄️ Frozen prey is not only safer but also more convenient to store and feed!'
     },
     {
@@ -240,7 +240,7 @@ export const quizData = {
         'Over a year'
       ],
       correctAnswer: 2,
-      explanation: 'Ball Pythons can go several months without eating, especially during breeding season or when stressed.',
+      explanation: 'Ball Pythons can go several months without eating, especially during breeding season or when stressed. Why this matters: appetite changes are common; monitor weight, not just meals.',
       funFact: '⏰ This ability to fast for long periods helps them survive in the wild when food is scarce!'
     }
     ,{
@@ -253,7 +253,7 @@ export const quizData = {
         '80-90%'
       ],
       correctAnswer: 2,
-      explanation: 'Ball Pythons generally do best at 50–60% humidity, slightly higher during shed.',
+      explanation: 'Ball Pythons generally do best at 50–60% humidity, slightly higher during shed. Why this matters: low humidity leads to retained shed and respiratory issues.',
       funFact: '💦 Providing a humid hide helps with clean sheds.'
     },
     {
@@ -266,8 +266,16 @@ export const quizData = {
         'One week'
       ],
       correctAnswer: 2,
-      explanation: 'Waiting 24–48 hours reduces the risk of regurgitation and stress.',
+      explanation: 'Waiting 24–48 hours reduces the risk of regurgitation and stress. Why this matters: handling too soon can cause health issues and stress.',
       funFact: '⏳ Patience after feeding keeps digestion smooth.'
+    }
+    ,{
+      id: 'bp_6',
+      question: 'What size prey should you offer?',
+      options: ['Any size', '10–15% of body weight or same girth as widest part', 'Twice the snake\'s girth', 'Only pinkies'],
+      correctAnswer: 1,
+      explanation: 'Prey about 10–15% of body weight (or same girth) is appropriate. Why this matters: oversize prey risks regurgitation or injury.',
+      funFact: '📏 Measuring girth is a reliable guide for prey sizing.'
     }
   ],
   'Corn Snake': [
@@ -281,7 +289,7 @@ export const quizData = {
         'They can teleport'
       ],
       correctAnswer: 1,
-      explanation: 'Corn Snakes can escape through surprisingly small openings and gaps in their enclosure.',
+      explanation: 'Corn Snakes can escape through surprisingly small openings and gaps in their enclosure. Why this matters: secure lids prevent escapes and stress.',
       funFact: '🚪 Always secure your Corn Snake\'s enclosure tightly - they\'re masters of finding escape routes!'
     },
     {
@@ -294,7 +302,7 @@ export const quizData = {
         'Over 1000'
       ],
       correctAnswer: 2,
-      explanation: 'Corn Snakes come in over 800 different color and pattern variations due to selective breeding.',
+      explanation: 'Corn Snakes come in over 800 color/pattern variations due to selective breeding. Why this matters: different morphs share the same care needs.',
       funFact: '🎨 This incredible variety makes Corn Snakes one of the most diverse snake species in captivity!'
     },
     {
@@ -307,7 +315,7 @@ export const quizData = {
         'Newspaper only'
       ],
       correctAnswer: 2,
-      explanation: 'Aspen shavings or cypress mulch provide good burrowing opportunities and are safe if accidentally ingested.',
+      explanation: 'Aspen shavings or cypress mulch provide good burrowing opportunities and are safe if accidentally ingested. Why this matters: wrong substrate can cause respiratory or digestive issues.',
       funFact: '🌱 Corn Snakes love to burrow, so providing substrate that allows this natural behavior is important!'
     }
     ,{
@@ -320,7 +328,7 @@ export const quizData = {
         'Once per month'
       ],
       correctAnswer: 2,
-      explanation: 'Adult Corn Snakes commonly eat every 7–10 days depending on size and temperature.',
+      explanation: 'Adult Corn Snakes commonly eat every 7–10 days depending on size and temperature. Why this matters: proper intervals maintain healthy weight and digestion.',
       funFact: '🍽️ Overfeeding can lead to obesity—monitor body condition.'
     },
     {
@@ -333,7 +341,7 @@ export const quizData = {
         'Same temperature everywhere'
       ],
       correctAnswer: 1,
-      explanation: 'Aim for ~85°F warm side and ~75°F cool side to allow thermoregulation.',
+      explanation: 'Aim for ~85°F warm side and ~75°F cool side to allow thermoregulation. Why this matters: gradients prevent overheating or chilling.',
       funFact: '🌡️ Providing gradients lets snakes choose their ideal body temperature.'
     }
   ]
@@ -382,9 +390,89 @@ export const generalQuiz = [
   }
 ];
 
+// Build generated quiz items from reptileData if explicit bank is missing or to augment
+import { reptileData } from './reptileData';
+
+const getSpeciesInfo = (name) => reptileData.find(s => s.name === name);
+
+const buildGeneratedSpeciesQuiz = (speciesName) => {
+  const s = getSpeciesInfo(speciesName);
+  if (!s) return [];
+  const items = [];
+  // Temperature/basking
+  if (s.habitat?.temperature) {
+    items.push({
+      id: `${speciesName.replace(/\s+/g,'_').toLowerCase()}_temp`,
+      question: `What is a proper temperature guidance for ${speciesName}?`,
+      options: [
+        s.habitat.temperature,
+        'Room temperature only',
+        'Below 60°F (15°C) at all times',
+        'No heat or gradient needed'
+      ],
+      correctAnswer: 0,
+      explanation: `${speciesName} needs ${s.habitat.temperature} as part of its thermal gradient.`,
+      funFact: `Thermal gradients let reptiles self‑regulate body temperature.`
+    });
+  }
+  // Humidity
+  if (s.habitat?.humidity) {
+    items.push({
+      id: `${speciesName.replace(/\s+/g,'_').toLowerCase()}_humidity`,
+      question: `What humidity level suits ${speciesName}?`,
+      options: [
+        s.habitat.humidity,
+        '0-10% humidity',
+        'Always 100% humidity',
+        'Humidity doesn’t matter'
+      ],
+      correctAnswer: 0,
+      explanation: `${speciesName} care calls for ${s.habitat.humidity}.`,
+      funFact: `Consistent humidity supports healthy sheds and respiration.`
+    });
+  }
+  // Enclosure size
+  if (s.habitat?.enclosureSize) {
+    items.push({
+      id: `${speciesName.replace(/\s+/g,'_').toLowerCase()}_tank`,
+      question: `What enclosure size is appropriate for ${speciesName}?`,
+      options: [
+        s.habitat.enclosureSize,
+        '5 gallon tank',
+        'Any small container',
+        'Outdoor only'
+      ],
+      correctAnswer: 0,
+      explanation: `Recommended enclosure: ${s.habitat.enclosureSize}.`,
+      funFact: `Bigger enclosures with proper enrichment improve welfare.`
+    });
+  }
+  // Diet
+  if (s.diet?.primary) {
+    items.push({
+      id: `${speciesName.replace(/\s+/g,'_').toLowerCase()}_diet`,
+      question: `What best describes ${speciesName}'s primary diet?`,
+      options: [
+        s.diet.primary,
+        'Bread and milk',
+        'Only fruit juice',
+        'Human leftovers'
+      ],
+      correctAnswer: 0,
+      explanation: `Diet guidance: ${s.diet.primary}.`,
+      funFact: `Varied, species‑appropriate diets keep reptiles thriving.`
+    });
+  }
+  return items;
+};
+
 // Get quiz for a specific species
 export const getSpeciesQuiz = (speciesName) => {
-  return quizData[speciesName] || [];
+  const explicit = quizData[speciesName] || [];
+  const generated = buildGeneratedSpeciesQuiz(speciesName);
+  // De‑duplicate by id
+  const seen = new Set();
+  return [...explicit, ...generated].filter(q => (seen.has(q.id) ? false : (seen.add(q.id), true)));
 };
 
 // Get all available species for quizzes

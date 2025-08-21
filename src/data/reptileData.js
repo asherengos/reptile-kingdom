@@ -133,6 +133,10 @@ export const reptileData = [
     name: "Ball Python",
     type: "Snake",
     emoji: "🐍",
+    slug: "ball-python",
+    displayName: "Ball Python",
+    shortDesc: "Calm, nocturnal snake with moderate care requirements.",
+    longDesc: "Ball pythons are gentle snakes known for curling into a ball when stressed. They require secure hides on both warm and cool sides, stable humidity, and appropriately sized frozen/thawed prey.",
     habitat: {
       temperature: "75-80°F (24-27°C) with 88-92°F (31-33°C) basking spot",
       humidity: "50-60% (70-80% during shedding)",
@@ -144,6 +148,14 @@ export const reptileData = [
       frequency: "Every 1-2 weeks for adults, every 5-7 days for juveniles",
       supplements: "No supplements needed with whole prey",
       water: "Large water dish for soaking and drinking"
+    },
+    size: "3-5 ft (0.9-1.5 m)",
+    lifespan: "20-30 years",
+    images: {
+      desktop: "ball-python-v1.webp",
+      mobile: "ball-python-v1.webp",
+      alt: "Ball python coiled calmly on branch",
+      caption: "Ball pythons are docile and do well with secure hides and steady humidity."
     },
     careTips: [
       "Provide multiple hiding spots (one on warm side, one on cool side)",
@@ -168,6 +180,10 @@ export const reptileData = [
     name: "Corn Snake",
     type: "Snake",
     emoji: "🐍",
+    slug: "corn-snake",
+    displayName: "Corn Snake",
+    shortDesc: "Hardy beginner snake with many color morphs.",
+    longDesc: "Corn snakes are active, curious snakes that thrive with a warm hide, a cool hide, and a secure lid. They are excellent feeders on frozen/thawed prey and make great first snakes.",
     habitat: {
       temperature: "75-80°F (24-27°C) with 85-88°F (29-31°C) basking spot",
       humidity: "40-50% (60-70% during shedding)",
@@ -179,6 +195,14 @@ export const reptileData = [
       frequency: "Every 5-7 days for juveniles, every 7-10 days for adults",
       supplements: "No supplements needed with whole prey",
       water: "Shallow water dish, change daily"
+    },
+    size: "3-5 ft (0.9-1.5 m)",
+    lifespan: "15-20 years",
+    images: {
+      desktop: "corn-snake-v1.webp",
+      mobile: "corn-snake-v1.webp",
+      alt: "Corn snake slithering across natural wood",
+      caption: "Corn snakes are escape artists—use a secure lid and check small gaps."
     },
     careTips: [
       "Provide climbing branches and hiding spots",

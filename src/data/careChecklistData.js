@@ -508,6 +508,13 @@ export const careChecklistData = {
         notes: 'Not essential but beneficial'
       }
     ],
+    careChecklist: [
+      { label: 'Spot clean enclosure', frequency: 'weekly', min: 1, max: 1, units: 'times', notes: 'Remove waste; replace soiled substrate.' },
+      { label: 'Check humidity', frequency: 'weekly', min: 50, max: 60, units: '%', notes: 'Increase to 70–80% during shed.' },
+      { label: 'Substrate change', frequency: 'monthly', min: 1, max: 1, units: 'times', notes: 'Deep clean enclosure.' },
+      { label: 'Feeding (adult)', frequency: 'biweekly', min: 7, max: 14, units: 'days', notes: 'Prey ~10–15% of body weight, never live.' },
+      { label: 'Health check', frequency: 'monthly', min: 1, max: 1, units: 'times', notes: 'Inspect for mites, retained shed, mouth rot.' }
+    ],
     aiRecommendations: [
       'Never handle for 48 hours after feeding',
       'Keep humidity at 50-60% (higher during shedding)',
@@ -627,6 +634,12 @@ export const careChecklistData = {
         estimatedCost: '$30-60',
         notes: 'Not essential but beneficial'
       }
+    ],
+    careChecklist: [
+      { label: 'Check temp gradient', frequency: 'weekly', min: 75, max: 85, units: '°F ambient', notes: 'Warm hotspot ~88–92°F.' },
+      { label: 'Deep clean enclosure', frequency: 'monthly', min: 1, max: 1, units: 'times', notes: 'Replace substrate; disinfect surfaces.' },
+      { label: 'Change water & inspect bowl', frequency: 'weekly', min: 1, max: 2, units: 'times', notes: 'Look for algae; scrub as needed.' },
+      { label: 'Handling practice', frequency: 'weekly', min: 2, max: 3, units: 'sessions', notes: '5–10 minutes; avoid 48 hours post‑feeding.' }
     ],
     aiRecommendations: [
       'Secure all enclosure openings tightly',
