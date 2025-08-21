@@ -1,45 +1,60 @@
 import React from 'react';
-import ResponsiveImage from '../components/ResponsiveImage.jsx';
+import ResponsiveImage from '../components/ResponsiveImage';
+
+const images = [
+  '/images/axolotl.jpg',
+  '/images/ball-python.jpg',
+  '/images/bearded-dragon.jpg',
+  '/images/blue-tongued-skink.jpg',
+  '/images/chameleon.jpg',
+  '/images/corn-snake.jpg',
+  '/images/crested-gecko.jpg',
+  '/images/dart-frog.jpg',
+  '/images/fire-bellied-toad.jpg',
+  '/images/gargoyle-gecko.jpg',
+  '/images/green-anole.jpg',
+  '/images/hero.jpg',
+  '/images/hognose-snake.jpg',
+  '/images/kingsnake.jpg',
+  '/images/leopard-gecko.jpg',
+  '/images/mexican-axolotl.jpg',
+  '/images/milk-snake.jpg',
+  '/images/pacman-frog.jpg',
+  '/images/red-eared-slider.jpg',
+  '/images/tiger-salamander.jpg',
+  '/images/uromastyx.jpg'
+];
 
 export default {
-  title: 'Media/ResponsiveImage',
+  title: 'Reptiles & Amphibians/Gallery',
   component: ResponsiveImage,
 };
 
-const Template = (args) => (
-  <div style={{ maxWidth: 600, margin: '2rem auto' }}>
-    <ResponsiveImage {...args} />
+export const Gallery = () => (
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+      gap: '16px',
+      padding: '16px'
+    }}
+  >
+    {images.map((src, index) => (
+      <div
+        key={index}
+        style={{
+          overflow: 'hidden',
+          borderRadius: '8px',
+        }}
+      >
+        <ResponsiveImage
+          src={src}
+          alt={`Animal ${index + 1}`}
+          style={{
+            cursor: 'pointer',
+          }}
+        />
+      </div>
+    ))}
   </div>
 );
-
-export const Srcset = Template.bind({});
-Srcset.args = {
-  images: {
-    desktop: 'bearded-dragon-v1.webp',
-    mobile: 'bearded-dragon-v1.webp',
-    alt: 'Bearded dragon on rock',
-  },
-  alt: 'Bearded dragon',
-  caption: 'Demonstrates srcset across 400/800/1200 widths',
-};
-
-export const WithLQIP = Template.bind({});
-WithLQIP.args = {
-  images: {
-    desktop: 'leopard-gecko-v1.webp',
-    mobile: 'leopard-gecko-v1.webp',
-    lqip: 'data:image/svg+xml;base64,PHN2Zy8+' , // tiny inline placeholder
-    alt: 'Leopard gecko perched',
-  },
-  alt: 'Leopard gecko',
-  caption: 'Shows low‑quality placeholder fading into the final image',
-};
-
-export const MissingImageFallback = Template.bind({});
-MissingImageFallback.args = {
-  images: {},
-  alt: 'Fallback placeholder',
-  caption: 'Renders a neutral placeholder when images are unavailable',
-};
-
-
