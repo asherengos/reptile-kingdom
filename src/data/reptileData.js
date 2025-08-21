@@ -1453,7 +1453,7 @@ additionalSpecies.forEach((s, idx) => {
       slug: s.name.toLowerCase().replace(/\s+/g, '-'),
       displayName: s.name,
       shortDesc: 'Popular species in the pet trade.',
-      longDesc: `${s.name} is a popular species that benefits from stable temperatures, proper lighting, and a species-appropriate diet. Research the specific care needs for best results.`,
+      longDesc: `${s.name} is a popular species that benefits from stable temperatures, proper lighting, and a balanced diet appropriate to its type (insects, leafy greens, or whole prey). Research the specific care needs for best results.`,
       habitat: defaults.habitat,
       diet: defaults.diet,
       size: defaults.size,
