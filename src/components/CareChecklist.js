@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { getSpeciesChecklist, getTotalEstimatedCost } from '../data/careChecklistData';
 import achievementService from '../services/achievementService';
 
-function CareChecklist({ species, onClose, isEmbedded = false }) {
+function CareChecklist({ species, onClose, isEmbedded = false, initialCategory = 'all', initialShowOptional = true }) {
   const [checklist, setChecklist] = useState(null);
   const [costBreakdown, setCostBreakdown] = useState(null);
   const [isMissing, setIsMissing] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [showOptional, setShowOptional] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [showOptional, setShowOptional] = useState(initialShowOptional);
   const [showExportOptions, setShowExportOptions] = useState(false);
   const [checkedItems, setCheckedItems] = useState(new Set());
 
@@ -24,14 +24,38 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
       const costInfo = getTotalEstimatedCost(species.name);
       setChecklist(speciesChecklist);
       setCostBreakdown(costInfo);
-      // Initialize checked items
-      const initialChecked = new Set();
-      speciesChecklist.essential.forEach(item => {
-        initialChecked.add(item.id);
-      });
-      setCheckedItems(initialChecked);
+      // Initialize checked items with persistence (prefer stored state)
+      try {
+        const storageKey = `careChecklist:${species.name}`;
+        const stored = localStorage.getItem(storageKey);
+        if (stored) {
+          const ids = JSON.parse(stored);
+          setCheckedItems(new Set(ids));
+        } else {
+          const initialChecked = new Set();
+          speciesChecklist.essential.forEach(item => {
+            initialChecked.add(item.id);
+          });
+          setCheckedItems(initialChecked);
+        }
+      } catch (e) {
+        const initialChecked = new Set();
+        speciesChecklist.essential.forEach(item => {
+          initialChecked.add(item.id);
+        });
+        setCheckedItems(initialChecked);
+      }
     }
   }, [species]);
+
+  // Sync external initial controls when they change (for Storybook controls)
+  useEffect(() => {
+    setSelectedCategory(initialCategory);
+  }, [initialCategory]);
+
+  useEffect(() => {
+    setShowOptional(initialShowOptional);
+  }, [initialShowOptional]);
 
   // Update achievement progress when checklist is viewed
   useEffect(() => {
@@ -50,6 +74,15 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
       newChecked.add(itemId);
     }
     setCheckedItems(newChecked);
+    // Persist per-species
+    try {
+      if (species) {
+        const storageKey = `careChecklist:${species.name}`;
+        localStorage.setItem(storageKey, JSON.stringify(Array.from(newChecked)));
+      }
+    } catch (e) {
+      // no-op
+    }
   };
 
   const getFilteredItems = () => {
@@ -129,6 +162,10 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
       }, null, 2);
       filename = `${species.name}-care-checklist.json`;
       mimeType = 'application/json';
+    } else if (format === 'csv') {
+      content = generateCSVExport();
+      filename = `${species.name}-care-checklist.csv`;
+      mimeType = 'text/csv';
     }
 
     if (content) {
@@ -209,18 +246,24 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
         <head>
           <title>${species.name} Care Checklist</title>
           <style>
-            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
-            .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 20px; }
-            .section { margin-bottom: 25px; }
-            .section-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #2D5016; }
-            .item { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
-            .item-title { font-weight: bold; color: #2D5016; }
-            .item-details { margin-top: 5px; color: #666; font-size: 14px; }
-            .cost { font-weight: bold; color: #e53e3e; }
-            .priority { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin-left: 10px; }
-            .critical { background-color: #fed7d7; color: #c53030; }
-            .important { background-color: #feebc8; color: #c05621; }
-            .nice-to-have { background-color: #bee3f8; color: #2b6cb0; }
+            :root { --ink: #1f2937; --accent: #2D5016; }
+            html, body { height: 100%; }
+            body { font-family: Arial, sans-serif; margin: 20mm; line-height: 1.55; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .header { text-align: center; margin-bottom: 18mm; border-bottom: 2px solid #333; padding-bottom: 8mm; }
+            .header h1 { margin: 0 0 6px 0; }
+            .meta { color: #4b5563; font-size: 12px; }
+            .section { margin-bottom: 14mm; }
+            .section-title { font-size: 16px; font-weight: 700; margin-bottom: 8mm; color: var(--accent); }
+            .list { display: grid; grid-template-columns: 1fr; gap: 6mm; }
+            .item { padding: 5mm; border: 1px solid #e5e7eb; border-radius: 6px; page-break-inside: avoid; }
+            .item-title { font-weight: 700; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
+            .item-details { margin-top: 3mm; color: #374151; font-size: 12px; }
+            .cost { font-weight: 700; color: #b91c1c; margin-left: 6mm; }
+            .priority { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; margin-left: 6mm; border: 1px solid currentColor; }
+            .critical { background-color: #fee2e2; color: #b91c1c; }
+            .important { background-color: #ffedd5; color: #b45309; }
+            .nice-to-have { background-color: #dbeafe; color: #1d4ed8; }
+            @page { size: A4; margin: 12mm; }
             @media print { .no-print { display: none; } }
           </style>
         </head>
@@ -233,31 +276,15 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
           
           <div class="section">
             <div class="section-title">🚨 Essential Items (Must Have)</div>
-            ${checklist.essential.map((item, index) => `
-              <div class="item">
-                <div class="item-title">
-                  ${index + 1}. ${item.item}
-                  <span class="cost">${item.estimatedCost}</span>
-                  <span class="priority ${item.priority}">${item.priority}</span>
-                </div>
-                <div class="item-details">
-                  <strong>Category:</strong> ${item.category}<br>
-                  <strong>Description:</strong> ${item.description}<br>
-                  <strong>Notes:</strong> ${item.notes}
-                </div>
-              </div>
-            `).join('')}
-          </div>
-
-          ${checklist.optional.length > 0 ? `
-            <div class="section">
-              <div class="section-title">💡 Optional Items (Nice to Have)</div>
-              ${checklist.optional.map((item, index) => `
+            <div class="list">
+              ${checklist.essential.map((item, index) => `
                 <div class="item">
                   <div class="item-title">
-                    ${index + 1}. ${item.item}
-                    <span class="cost">${item.estimatedCost}</span>
-                    <span class="priority ${item.priority}">${item.priority}</span>
+                    <span>${index + 1}. ${item.item}</span>
+                    <span>
+                      <span class="cost">${item.estimatedCost}</span>
+                      <span class="priority ${item.priority}">${item.priority}</span>
+                    </span>
                   </div>
                   <div class="item-details">
                     <strong>Category:</strong> ${item.category}<br>
@@ -267,18 +294,44 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
                 </div>
               `).join('')}
             </div>
+          </div>
+
+          ${checklist.optional.length > 0 ? `
+            <div class="section">
+              <div class="section-title">💡 Optional Items (Nice to Have)</div>
+              <div class="list">
+                ${checklist.optional.map((item, index) => `
+                  <div class="item">
+                    <div class="item-title">
+                      <span>${index + 1}. ${item.item}</span>
+                      <span>
+                        <span class="cost">${item.estimatedCost}</span>
+                        <span class="priority ${item.priority}">${item.priority}</span>
+                      </span>
+                    </div>
+                    <div class="item-details">
+                      <strong>Category:</strong> ${item.category}<br>
+                      <strong>Description:</strong> ${item.description}<br>
+                      <strong>Notes:</strong> ${item.notes}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
           ` : ''}
 
           ${checklist.aiRecommendations.length > 0 ? `
             <div class="section">
               <div class="section-title">🤖 AI Care Recommendations</div>
-              ${checklist.aiRecommendations.map((rec, index) => `
-                <div class="item">
-                  <div class="item-details">
-                    ${index + 1}. ${rec}
+              <div class="list">
+                ${checklist.aiRecommendations.map((rec, index) => `
+                  <div class="item">
+                    <div class="item-details">
+                      ${index + 1}. ${rec}
+                    </div>
                   </div>
-                </div>
-              `).join('')}
+                `).join('')}
+              </div>
             </div>
           ` : ''}
 
@@ -290,6 +343,23 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
       </html>
     `);
     printWindow.document.close();
+  };
+
+  const generateCSVExport = () => {
+    const rows = [];
+    const escape = (val) => {
+      if (val == null) return '';
+      const s = String(val).replace(/"/g, '""');
+      return `"${s}"`;
+    };
+    rows.push(['Section', 'ID', 'Item', 'Category', 'Priority', 'Estimated Cost', 'Description', 'Notes'].map(escape).join(','));
+    checklist.essential.forEach((item) => {
+      rows.push(['Essential', item.id, item.item, item.category, item.priority, item.estimatedCost, item.description, item.notes || ''].map(escape).join(','));
+    });
+    checklist.optional.forEach((item) => {
+      rows.push(['Optional', item.id, item.item, item.category, item.priority, item.estimatedCost, item.description, item.notes || ''].map(escape).join(','));
+    });
+    return rows.join('\n');
   };
 
   const filteredItems = getFilteredItems();
@@ -420,6 +490,12 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
                   className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors duration-200"
                 >
                   🔧 JSON File
+                </button>
+                <button
+                  onClick={() => exportChecklist('csv')}
+                  className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors duration-200"
+                >
+                  📊 CSV File
                 </button>
                 <button
                   onClick={printChecklist}
@@ -686,6 +762,12 @@ function CareChecklist({ species, onClose, isEmbedded = false }) {
                     className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors duration-200"
                   >
                     🔧 JSON File
+                  </button>
+                  <button
+                    onClick={() => exportChecklist('csv')}
+                    className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors duration-200"
+                  >
+                    📊 CSV File
                   </button>
                   <button
                     onClick={printChecklist}
