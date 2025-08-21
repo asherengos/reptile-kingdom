@@ -4,6 +4,10 @@ export const reptileData = [
     name: "Leopard Gecko",
     type: "Lizard",
     emoji: "🦎",
+    slug: "leopard-gecko",
+    displayName: "Leopard Gecko",
+    shortDesc: "Beginner‑friendly nocturnal lizard with simple heating needs.",
+    longDesc: "Leopard Geckos are hardy, calm lizards that thrive with a warm hide, a cool hide, and a moist hide for shedding. They do best with belly heat and do not require intense UVB.",
     habitat: {
       temperature: "75-85°F (24-29°C) with 90°F (32°C) basking spot",
       humidity: "30-40%",
@@ -15,6 +19,14 @@ export const reptileData = [
       frequency: "Every 1-2 days for juveniles, 2-3 times per week for adults",
       supplements: "Calcium with D3 and multivitamin powder",
       water: "Shallow water dish, mist occasionally"
+    },
+    size: "7-10 in (18-25 cm)",
+    lifespan: "15-20 years",
+    images: {
+      desktop: "leopard-gecko-v1.webp",
+      mobile: "leopard-gecko-v1.webp",
+      alt: "Leopard gecko perched on a rock",
+      caption: "Leopard geckos are calm, hardy lizards ideal for beginners."
     },
     careTips: [
       "Provide multiple hiding spots and climbing opportunities",
@@ -39,6 +51,10 @@ export const reptileData = [
     name: "Bearded Dragon",
     type: "Lizard",
     emoji: "🐉",
+    slug: "bearded-dragon",
+    displayName: "Bearded Dragon",
+    shortDesc: "Day‑active lizard that enjoys handling and basking under UVB.",
+    longDesc: "Bearded Dragons are engaging, diurnal lizards that require strong UVB, a hot basking spot, and a varied omnivorous diet that shifts from insects to greens as they age.",
     habitat: {
       temperature: "75-85°F (24-29°C) with 95-105°F (35-40°C) basking spot",
       humidity: "30-40%",
@@ -50,6 +66,14 @@ export const reptileData = [
       frequency: "Daily for juveniles, every 1-2 days for adults",
       supplements: "Calcium with D3 and multivitamin powder",
       water: "Shallow water dish, mist vegetables for hydration"
+    },
+    size: "18-24 in (45-60 cm)",
+    lifespan: "10-15 years",
+    images: {
+      desktop: "bearded-dragon-v1.webp",
+      mobile: "bearded-dragon-v1.webp",
+      alt: "Bearded dragon basking under a heat lamp",
+      caption: "Bearded dragons need bright basking light and strong UVB."
     },
     careTips: [
       "Provide UVB lighting for proper calcium absorption",

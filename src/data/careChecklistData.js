@@ -126,6 +126,13 @@ export const careChecklistData = {
         notes: 'Not essential but beneficial'
       }
     ],
+    careChecklist: [
+      { label: 'Spot clean enclosure', frequency: 'daily', notes: 'Remove waste and uneaten insects.' },
+      { label: 'Refresh water dish', frequency: 'daily', notes: 'Use shallow dish; replace with clean water.' },
+      { label: 'Feed insects (juveniles)', frequency: 'every 1-2 days', notes: 'Dust with calcium with D3.' },
+      { label: 'Feed insects (adults)', frequency: '2-3x/week', notes: 'Vary insects: crickets, dubia, mealworms.' },
+      { label: 'Check warm/cool hide temps', frequency: 'weekly', notes: 'Warm side ~90°F; cool ~75°F.' }
+    ],
     aiRecommendations: [
       'Replace heat mat every 1-2 years for safety',
       'Clean water dish daily to prevent bacteria',
@@ -263,6 +270,12 @@ export const careChecklistData = {
         estimatedCost: '$15-25',
         notes: 'Many dragons enjoy hammocks'
       }
+    ],
+    careChecklist: [
+      { label: 'Offer fresh greens (adults)', frequency: 'daily', notes: 'Collards, mustard greens, squash.' },
+      { label: 'Feed insects (juveniles)', frequency: 'daily', notes: 'Small crickets/roaches dusted with calcium.' },
+      { label: 'UVB bulb check', frequency: 'monthly', notes: 'Replace every 6–12 months.' },
+      { label: 'Basking spot temp check', frequency: 'weekly', notes: 'Aim for 95–105°F for adults.' }
     ],
     aiRecommendations: [
       'Replace UVB bulb every 6-12 months for effectiveness',
