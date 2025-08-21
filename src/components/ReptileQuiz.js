@@ -21,7 +21,9 @@ function ReptileQuiz({ species, onClose }) {
 
   // Load a new quiz question
   const loadNewQuiz = () => {
-    const quiz = species ? getRandomQuiz(species.name) : getRandomQuiz();
+    // Prefer species‑specific bank, generated + explicit
+    const pool = species ? getSpeciesQuiz(species.name) : null;
+    const quiz = species && pool && pool.length > 0 ? getRandomQuiz(species.name) : getRandomQuiz();
     setCurrentQuiz(quiz);
     setSelectedAnswer(null);
     setIsAnswered(false);
