@@ -707,7 +707,7 @@ const generateChecklist = (speciesName) => {
       base[1], base[2], base[3],
       { id: `${slug}_substrate`, category: 'Substrate', item: 'Reptile carpet or tile', description: 'Safe/easy clean', priority: 'critical', estimatedCost: '$15-30', notes: '' },
       { id: `${slug}_water_dish`, category: 'Water', item: 'Water dish', description: 'For drinking', priority: 'important', estimatedCost: '$5-15', notes: '' },
-      { id: `${slug}_food`, category: 'Food', item: 'Insects or greens', description: 'Diet varies by species', priority: 'critical', estimatedCost: '$8-20/week', notes: '' }
+      { id: `${slug}_food`, category: 'Food', item: 'Insects or greens', description: 'Insectivores: crickets/roaches; herbivores: collards/dandelion', priority: 'critical', estimatedCost: '$8-20/week', notes: 'Adjust to species diet' }
     ];
   }
 

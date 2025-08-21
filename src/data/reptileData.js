@@ -1343,7 +1343,92 @@ additionalSpecies.forEach((s, idx) => {
   if (enhancedProfiles[speciesName]) {
     reptileData.push(enhancedProfiles[speciesName]);
   } else {
-    // Fallback for any species not in enhanced profiles
+    // Fallback for any species not in enhanced profiles – provide helpful, type-based defaults
+    const typeLower = (s.type || '').toLowerCase();
+    const defaultsByType = {
+      lizard: {
+        habitat: {
+          temperature: '75-85°F (24-29°C) with 90-100°F (32-38°C) basking',
+          humidity: '40-60% (tropical 60-80%)',
+          enclosureSize: '20+ gallon for small species; 18x18x24"+ arboreal',
+          substrate: 'Reptile carpet, tile, or cypress mulch'
+        },
+        diet: {
+          primary: 'Insectivores: crickets/roaches/worms; omnivores: add leafy greens',
+          frequency: 'Juveniles daily; adults every 2-3 days',
+          supplements: 'Calcium with D3 2-3x/week; multivitamin 1x/week',
+          water: 'Shallow dish; change daily'
+        },
+        size: '6-24 inches (15-60 cm)',
+        lifespan: '8-20 years'
+      },
+      snake: {
+        habitat: {
+          temperature: '75-85°F (24-29°C) with 85-90°F (29-32°C) warm side',
+          humidity: '30-60% (species-dependent)',
+          enclosureSize: '20+ gallon for small species; larger for adults',
+          substrate: 'Aspen shavings, cypress mulch, or paper'
+        },
+        diet: {
+          primary: 'Frozen/thawed rodents sized to widest part of body',
+          frequency: 'Juveniles every 5-7 days; adults every 7-14 days',
+          supplements: 'Not typically needed',
+          water: 'Fresh water dish; change regularly'
+        },
+        size: '2-6 feet (0.6-1.8 m)',
+        lifespan: '10-25 years'
+      },
+      turtle: {
+        habitat: {
+          temperature: 'Water 75-80°F (24-27°C), basking 85-90°F (29-32°C)',
+          humidity: 'Aquatic',
+          enclosureSize: '75+ gallons for adults',
+          substrate: 'Bare bottom or large river stones'
+        },
+        diet: {
+          primary: 'Pellets with leafy greens; occasional protein',
+          frequency: 'Juveniles daily; adults 4-5x/week',
+          supplements: 'Calcium and UVB exposure for shell health',
+          water: 'Strong filtration; weekly partial water changes'
+        },
+        size: '6-12 inches shell length (15-30 cm)',
+        lifespan: '20-40 years'
+      },
+      amphibian: {
+        habitat: {
+          temperature: '60-75°F (16-24°C)',
+          humidity: '70-90% (aquatic for fully aquatic species)',
+          enclosureSize: '10+ gallons small species; 20+ gallons larger',
+          substrate: 'Coconut fiber, sphagnum moss, or bioactive'
+        },
+        diet: {
+          primary: 'Small insects (fruit flies, crickets, worms) or aquatic pellets',
+          frequency: 'Every 1-3 days depending on species',
+          supplements: 'Calcium powder on insects',
+          water: 'Dechlorinated water; mist or partial water changes daily'
+        },
+        size: '1-12 inches (2.5-30 cm)',
+        lifespan: '5-15 years (some longer)'
+      }
+    };
+
+    const defaults = defaultsByType[typeLower] || {
+      habitat: {
+        temperature: '72-82°F (22-28°C)',
+        humidity: '40-70%',
+        enclosureSize: 'Appropriate adult size with secure lid',
+        substrate: 'Species-appropriate, easy to clean'
+      },
+      diet: {
+        primary: 'Balanced, species-appropriate diet',
+        frequency: 'Juveniles more often than adults',
+        supplements: 'Calcium/mineral support as appropriate',
+        water: 'Fresh, clean water available at all times'
+      },
+      size: 'Small-to-medium sized captive species',
+      lifespan: '8-20 years with proper care'
+    };
+
     reptileData.push({
       id: baseId,
       name: s.name,
@@ -1352,32 +1437,22 @@ additionalSpecies.forEach((s, idx) => {
       slug: s.name.toLowerCase().replace(/\s+/g, '-'),
       displayName: s.name,
       shortDesc: 'Popular species in the pet trade.',
-      longDesc: `${s.name} is a popular species that requires proper research and care. Always ensure you understand their specific needs before bringing one home.`,
-      habitat: {
-        temperature: 'Varies by setup',
-        humidity: 'Varies by setup',
-        enclosureSize: 'Appropriate adult size',
-        substrate: 'Species-appropriate'
-      },
-      diet: {
-        primary: 'Species-appropriate diet',
-        frequency: 'Varies by life stage',
-        supplements: 'As recommended',
-        water: 'Fresh water; details vary'
-      },
-      size: 'Varies by species',
-      lifespan: 'Varies by species',
+      longDesc: `${s.name} is a popular species that benefits from stable temperatures, proper lighting, and a species-appropriate diet. Research the specific care needs for best results.`,
+      habitat: defaults.habitat,
+      diet: defaults.diet,
+      size: defaults.size,
+      lifespan: defaults.lifespan,
       images: {
         desktop: `${s.name.toLowerCase().replace(/\s+/g, '-')}-v1.webp`,
         mobile: `${s.name.toLowerCase().replace(/\s+/g, '-')}-v1.webp`,
         alt: `${s.name} in natural habitat`,
-        caption: `${s.name} requires proper research and care.`
+        caption: `${s.name} requires consistent temperatures and clean water.`
       },
       careTips: [
-        'Research species-specific requirements',
         'Provide secure hides and enrichment',
-        'Monitor temperature and humidity',
-        'Consult experienced keepers'
+        'Monitor temperature and humidity with digital gauges',
+        'Offer appropriately sized, varied diet',
+        'Quarantine new animals and practice good hygiene'
       ],
       funFacts: [
         'Popular in the pet trade',
@@ -1388,7 +1463,7 @@ additionalSpecies.forEach((s, idx) => {
       warnings: [
         'Ensure enclosure size and heating are adequate',
         'Avoid wild-caught animals when possible',
-        'Research thoroughly before purchase'
+        'Never release pets into the wild'
       ]
     });
   }
